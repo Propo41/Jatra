@@ -23,13 +23,14 @@ public class dataBaseSQL {
     private Statement statement;
     private String serviceType;
     private User user;
+    private static int index = 0;
 
     public dataBaseSQL(User user) {
 
-        System.out.println("bug: " + user.getServiceType());
         this.serviceType = user.getServiceType();
         this.user = user;
         dbUrl = "jdbc:mysql://localhost:3306/";
+        //  index = 0;
 
     }
 
@@ -41,13 +42,21 @@ public class dataBaseSQL {
         this.dbUrl = dbUrl;
     }
 
-    public String searchQuery() {
+    public String searchQuery(int index) {
 
+        /*
+        to select individual items based on their index use the command :
+            SELECT * FROM passenger.user
+            WHERE indexID = 0;
+        Also, while inserting data into the database, increment index value by 1
+
+         */
         return null;
     }
 
     public void uploadData() {
 
+        System.out.println("index: " + index);
         try {
             Connection myConn = DriverManager.getConnection(dbUrl + serviceType + "?autoReconnect=true&useSSL=false", username, password);
             Statement statement = myConn.createStatement();
@@ -57,13 +66,15 @@ public class dataBaseSQL {
                     + user.getEmail() + "', '"
                     + user.getPassword() + "', '"
                     + user.getPhoneNumber() + "', '"
-                    + user.getCity() + "'";
+                    + user.getCity() + "', '"
+                    + index + "'";
 
             String sql = "insert into user "
-                    + " (username, email, password, phoneNumber, city)"
+                    + " (username, email, password, phoneNumber, city, indexID)"
                     + " values (" + valuesToInsert + ")";
 
             statement.executeUpdate(sql);
+            index++;
 
         } catch (Exception e) {
             Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, e);
