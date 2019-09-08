@@ -9,12 +9,12 @@ package util.popUpWindows;
  *
  * @author USER
  */
-public class EmptyFields extends javax.swing.JFrame {
+public class WrongCredentials extends javax.swing.JFrame {
 
     /**
      * Creates new form SigningOut
      */
-    public EmptyFields() {
+    public WrongCredentials() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -39,7 +39,7 @@ public class EmptyFields extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("All Fields are required to be filled.");
+        jLabel1.setText("Credentials wrong. Try again!");
 
         signingOutYesButton.setBackground(new java.awt.Color(33, 33, 33));
         signingOutYesButton.setFont(new java.awt.Font("Leelawadee UI", 0, 13)); // NOI18N
@@ -56,23 +56,23 @@ public class EmptyFields extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
+                .addGap(153, 153, 153)
                 .addComponent(signingOutYesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(signingOutYesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,6 +90,7 @@ public class EmptyFields extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signingOutYesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signingOutYesButtonActionPerformed
+        // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_signingOutYesButtonActionPerformed
 
@@ -110,21 +111,23 @@ public class EmptyFields extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmptyFields.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WrongCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmptyFields.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WrongCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmptyFields.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WrongCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmptyFields.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WrongCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmptyFields().setVisible(true);
+                new WrongCredentials().setVisible(true);
             }
         });
     }

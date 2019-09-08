@@ -8,6 +8,7 @@ package database;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.JatraBegins;
 import main.User;
 
 /**
@@ -33,6 +34,7 @@ public class dataBaseSQL {
 
     public dataBaseSQL() {
 
+        dbUrl = "jdbc:mysql://localhost:3306/";
     }
 
     public void setDbURL(String dbUrl) {
@@ -55,7 +57,7 @@ public class dataBaseSQL {
 
         System.out.println("index: " + index);
         try {
-            Connection myConn = DriverManager.getConnection(dbUrl + serviceType + "?autoReconnect=true&useSSL=false", username, password);
+            Connection myConn = DriverManager.getConnection(dbUrl + serviceType + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
 
             String valuesToInsert = "'"
@@ -77,6 +79,73 @@ public class dataBaseSQL {
             Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, e);
 
         }
+
+    }
+
+    public boolean checkAvailablity(String email, String password) {
+
+        if (checkPassenger(email, password)) {
+            JatraBegins.setUser("passenger");
+            return true;
+
+        } else if (checkOwner(email, password)) {
+
+            JatraBegins.setUser("owner");
+            return true;
+
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean checkPassenger(String email, String password) {
+        try {
+
+            int key;
+            Connection myConn = DriverManager.getConnection(dbUrl + "passenger" + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+            ResultSet result = statement.executeQuery("select email, password, indexID from user");
+
+            while (result.next()) {
+                if (result.getString("email").equals(email) && result.getString("password").equals(password)) {
+                    key = result.getInt("indexID");
+                    JatraBegins.setKey(key);
+                    return true;
+                    //System.out.println("key: " + key);
+                }
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, e);
+
+        }
+        return false;
+    }
+
+    public boolean checkOwner(String email, String password) {
+
+        try {
+
+            int key;
+            Connection myConn = DriverManager.getConnection(dbUrl + "owner" + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+            ResultSet result = statement.executeQuery("select email, password, indexID from user");
+
+            while (result.next()) {
+                if (result.getString("email").equals(email) && result.getString("password").equals(password)) {
+                    key = result.getInt("indexID");
+                    JatraBegins.setKey(key);
+                    return true;
+                    //System.out.println("key: " + key);
+                }
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, e);
+
+        }
+        return false;
 
     }
 

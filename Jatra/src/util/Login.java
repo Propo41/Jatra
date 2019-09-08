@@ -5,6 +5,11 @@
  */
 package util;
 
+import database.dataBaseSQL;
+import main.JatraBegins;
+import util.popUpWindows.EmptyFields;
+import util.popUpWindows.WrongCredentials;
+
 /**
  *
  * @author USER
@@ -39,8 +44,8 @@ public class Login extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         LoginButton = new javax.swing.JButton();
-        loginPasswordTextField = new javax.swing.JTextField();
-        loginNameTextField = new javax.swing.JTextField();
+        passTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
         SignUpButton = new javax.swing.JButton();
         GoogleButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -87,17 +92,27 @@ public class Login extends javax.swing.JFrame {
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
         LoginButton.setText("Log In");
         LoginButton.setBorder(null);
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
         jPanel2.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 140, 30));
 
-        loginPasswordTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
-        loginPasswordTextField.setForeground(new java.awt.Color(0, 253, 251));
-        loginPasswordTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(loginPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 230, 30));
+        passTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
+        passTextField.setForeground(new java.awt.Color(0, 253, 251));
+        passTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        passTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 230, 30));
 
-        loginNameTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
-        loginNameTextField.setForeground(new java.awt.Color(0, 253, 251));
-        loginNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(loginNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 230, 30));
+        emailTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
+        emailTextField.setForeground(new java.awt.Color(0, 253, 251));
+        emailTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 230, 30));
 
         SignUpButton.setBackground(new java.awt.Color(33, 33, 33));
         SignUpButton.setFont(new java.awt.Font("Leelawadee UI", 0, 13)); // NOI18N
@@ -156,12 +171,51 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpButtonMouseClicked
-        
+
+        //signup window appears
         SignUp signupWindow = new SignUp();
         signupWindow.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_SignUpButtonMouseClicked
+
+    /*
+    upon pressing the button, the program checks if the entered user details are in the database
+    if it exists, then the user will be taken to their designated homepage
+    it it doesnt, then a pop window appears saying credentials wrong
+    Also, if any of the fields are empty, a popup window appears
+     */
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+
+        if (emailTextField.getText().isEmpty() || passTextField.getText().isEmpty()) {
+            new EmptyFields().setVisible(true);
+        } else {
+            String email = emailTextField.getText();
+            String password = passTextField.getText();
+
+            if (!new dataBaseSQL().checkAvailablity(email, password)) {
+                // if credentials doesn't match then open a window
+                new WrongCredentials().setVisible(true);
+
+            } else {
+
+                if (JatraBegins.getUser().equals("passenger")) {
+                    //open passenger homepage
+                    new passenger.Homepage().setVisible(true);
+                    this.setVisible(false);
+
+                } else {
+                    //open owner homepage
+                    new owner.HomePage().setVisible(true);
+                    this.setVisible(false);
+                }
+            }
+        }
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void passTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passTextFieldActionPerformed
+
+    }//GEN-LAST:event_passTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +257,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton GoogleButton;
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton SignUpButton;
+    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -214,7 +269,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField loginNameTextField;
-    private javax.swing.JTextField loginPasswordTextField;
+    private javax.swing.JTextField passTextField;
     // End of variables declaration//GEN-END:variables
 }
