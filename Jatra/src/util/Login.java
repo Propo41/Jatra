@@ -44,10 +44,10 @@ public class Login extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         LoginButton = new javax.swing.JButton();
-        passTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         SignUpButton = new javax.swing.JButton();
         GoogleButton = new javax.swing.JButton();
+        passTextField = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -99,16 +99,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel2.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 140, 30));
 
-        passTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
-        passTextField.setForeground(new java.awt.Color(0, 253, 251));
-        passTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        passTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passTextFieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 230, 30));
-
         emailTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
         emailTextField.setForeground(new java.awt.Color(0, 253, 251));
         emailTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -132,6 +122,7 @@ public class Login extends javax.swing.JFrame {
         GoogleButton.setText("Google");
         GoogleButton.setBorder(null);
         jPanel2.add(GoogleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 70, 20));
+        jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 230, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,11 +178,11 @@ public class Login extends javax.swing.JFrame {
      */
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
 
-        if (emailTextField.getText().isEmpty() || passTextField.getText().isEmpty()) {
+        if (emailTextField.getText().isEmpty() || String.valueOf(passTextField.getPassword()).isEmpty()) {
             new EmptyFields().setVisible(true);
         } else {
             String email = emailTextField.getText();
-            String password = passTextField.getText();
+            String password = String.valueOf(passTextField.getPassword());
 
             if (!new dataBaseSQL().checkAvailablity(email, password)) {
                 // if credentials doesn't match then open a window
@@ -212,10 +203,6 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_LoginButtonActionPerformed
-
-    private void passTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passTextFieldActionPerformed
-
-    }//GEN-LAST:event_passTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +256,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField passTextField;
+    private javax.swing.JPasswordField passTextField;
     // End of variables declaration//GEN-END:variables
 }

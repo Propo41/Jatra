@@ -1,5 +1,7 @@
 package main;
 
+import googlemapsapi.AddressAPI;
+
 public class JatraBegins {
 
     private static int key;
@@ -7,6 +9,8 @@ public class JatraBegins {
 
     public static void main(String[] args) {
         //entry point of program
+
+        new AddressAPI().findAddressFromQuery("kala");
 
     }
 
