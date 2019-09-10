@@ -5,10 +5,12 @@
  */
 package passenger;
 
+import googlemapsapi.AddressAPI;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JFrame;
+import googlemapsapi.*;
 
 /**
  *
@@ -16,17 +18,20 @@ import javax.swing.JFrame;
  */
 public class PredictionsWindow extends javax.swing.JFrame {
 
+    private String type;
+
     public PredictionsWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
-    public PredictionsWindow(ArrayList<String> query) {
+    public PredictionsWindow(ArrayList<String> query, String type) {
 
         // this.setUndecorated(true);
         initComponents();
         addItemsCB(query);
         this.setLocationRelativeTo(null);
+        this.type = type;
 
     }
 
@@ -39,7 +44,6 @@ public class PredictionsWindow extends javax.swing.JFrame {
         comboBox = new javax.swing.JComboBox<>();
         selectButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(100, 211, 251));
@@ -103,7 +107,29 @@ public class PredictionsWindow extends javax.swing.JFrame {
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
 
-        comboBox.getSelectedItem().toString();
+        String str;
+        if (type.equals("current")) {
+            str = comboBox.getSelectedItem().toString();
+            Homepage.setCurrentlocation(str);
+            String place_id = AddressAPI.searchPlaceIDFromSelectedAddress(str);
+            Location location = new GeoCodeAPI().findCoordinates(place_id);
+
+            NearbyBusStopsAPI.setCurrCoordinates(location);
+            // new NearbyBusStopsAPI(location);
+
+            System.out.println("LOCATION: " + location.getLat() + " " + location.getLng());
+
+        } else {
+            str = comboBox.getSelectedItem().toString();
+            Homepage.setDestinedlocation(str);
+            String place_id = AddressAPI.searchPlaceIDFromSelectedAddress(str);
+            Location location = new GeoCodeAPI().findCoordinates(place_id);
+
+            NearbyBusStopsAPI.setDestCoordinates(location);
+
+            //  new NearbyBusStopsAPI(location);
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_selectButtonActionPerformed
 
@@ -113,7 +139,7 @@ public class PredictionsWindow extends javax.swing.JFrame {
 
         for (int i = 0; i < query.size(); i++) {
             comboBox.addItem(query.get(i));
-            System.out.println(query.get(i));
+            // System.out.println(query.get(i));
 
         }
 

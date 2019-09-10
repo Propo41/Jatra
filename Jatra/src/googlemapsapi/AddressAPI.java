@@ -18,11 +18,10 @@ public class AddressAPI {
 
     private String jsonString;
     private final String PLACES_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
-    // private String[] addresses;
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<String> list;
 
     public AddressAPI() {
-        // addresses = new String[100];
+        list = new ArrayList<>();
     }
 
     /*
@@ -30,20 +29,24 @@ public class AddressAPI {
     location is set to an arbitary center point in the map of dhaka city.
     radius is set to 8020km which covers dhaka city (estimated)
     type of address is set to return exact locations of geolocations.
+    returns: an array list of string containing the predictions (auto complete)
      */
     public ArrayList<String> findAddressFromQuery(String keyword) {
 
         try {
 
             String address = "https://maps.googleapis.com/maps/api/place/autocomplete/json?"
-                    + "input="
-                    + keyword
-                    + "&types=address&location=23.790922,90.415615&radius=8020&strictbounds&key="
-                    + PLACES_API_KEY;
+                    + "input=" + keyword
+                    + "&types=address&"
+                    + "location=23.790922,90.415615&"
+                    + "radius=8020&"
+                    + "strictbounds&"
+                    + "key=" + PLACES_API_KEY;
+
             jsonString = Parser.convertURLtoString(address);
-            AutoCompleteAddress obj = Parser.deSerialize(jsonString);
+            AutoCompleteAddress obj = Parser.deSerialize_Address(jsonString);
+            GlobalVariables.setAutoCompleteAddress(obj);
             outputAddressesToArray(obj);
-            // System.out.println("length in homepage: " + addresses.length);
 
         } catch (IOException ex) {
             Logger.getLogger(AddressAPI.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +58,8 @@ public class AddressAPI {
 
     /*
     iterates through the list <Predictions> defined in AutoCompleteAddresses and returns
-    the string correspondingly
+    the string correspondingly.
+    called implicitly from findAddressFromQuery() method
      */
     private void outputAddressesToArray(AutoCompleteAddress obj) {
 
@@ -63,10 +67,7 @@ public class AddressAPI {
 
         int i = 0;
         while (itr.hasNext()) {
-            //   list[i] = itr.next().getStructured_formatting().getMain_text();
-            //  System.out.println("value: " + addresses[i]);
 
-            //  i++;
             list.add(itr.next().getStructured_formatting().getMain_text());
 
         }
@@ -74,6 +75,29 @@ public class AddressAPI {
         System.out.println("length in homepage: " + list.size());
 
         // System.out.println("i: " + i);
+    }
+
+    /*
+    iterates through the AutoComplete obj and checks where the @address is located and
+    then the place_id is found from that list
+    returns: the place_id of the address
+     */
+    public static String searchPlaceIDFromSelectedAddress(String address) {
+
+        AutoCompleteAddress obj = GlobalVariables.getAutoCompleteAddress();
+        for (int i = 0; i < obj.predictions.size(); i++) {
+
+            if (obj.predictions.get(i).getStructured_formatting().getMain_text().equals(address)) {
+
+                System.out.println("PLACE_ID: " + obj.predictions.get(i).getPlace_id() + "  name: " + obj.predictions.get(i).getStructured_formatting().getMain_text());
+                return obj.predictions.get(i).getPlace_id();
+
+            }
+
+        }
+
+        return null;
+
     }
 
 }

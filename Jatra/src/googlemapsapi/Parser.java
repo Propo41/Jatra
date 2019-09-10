@@ -41,10 +41,23 @@ public class Parser {
     parses the json string that's sent as a parameter using the Gson library.
     The results are stored in an object of class AutoCompleteAddress.
      */
-    public static AutoCompleteAddress deSerialize(String jsonString) {
+    public static AutoCompleteAddress deSerialize_Address(String jsonString) {
 
         Gson gson = new Gson();
         return gson.fromJson(jsonString, AutoCompleteAddress.class);
+
+    }
+
+    public static BusStops deSerialize_BusStops(String jsonString) {
+
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, BusStops.class);
+
+    }
+
+    public static GeoCode deSerialize_GeoCode(String jsonString) {
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, GeoCode.class);
 
     }
 

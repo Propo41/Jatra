@@ -9,6 +9,10 @@ public class AutoCompleteAddress {
     public AutoCompleteAddress(List<Prediction> predictions) {
         this.predictions = predictions;
     }
+
+    public AutoCompleteAddress() {
+
+    }
 }
 
 class Prediction {
@@ -25,6 +29,24 @@ class Prediction {
         this.place_id = place_id;
         this.reference = reference;
         this.structured_formatting = structured_formatting;
+    }
+
+    //inner class
+    class Structured_formatting {
+
+        private String main_text;
+
+        public Structured_formatting(String main_text) {
+            this.main_text = main_text;
+        }
+
+        public String getMain_text() {
+            return main_text;
+        }
+
+        public void setMain_text(String main_text) {
+            this.main_text = main_text;
+        }
     }
 
     public String getDescription() {
@@ -65,24 +87,6 @@ class Prediction {
 
     public void setStructured_formatting(Structured_formatting structured_formatting) {
         this.structured_formatting = structured_formatting;
-    }
-
-    //inner class
-    class Structured_formatting {
-
-        private String main_text;
-
-        public Structured_formatting(String main_text) {
-            this.main_text = main_text;
-        }
-
-        public String getMain_text() {
-            return main_text;
-        }
-
-        public void setMain_text(String main_text) {
-            this.main_text = main_text;
-        }
     }
 
 }

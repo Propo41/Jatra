@@ -6,6 +6,7 @@
 package passenger;
 
 import googlemapsapi.AddressAPI;
+import googlemapsapi.NearbyBusStopsAPI;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,8 @@ public class Homepage extends javax.swing.JFrame {
 
     private ArrayList<String> currentLocationPredictions;
     private ArrayList<String> destinedLocationPredictions;
+    private static String currentlocation;
+    private static String destinedlocation;
 
     public Homepage() {
         initComponents();
@@ -99,6 +102,11 @@ public class Homepage extends javax.swing.JFrame {
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("Submit");
         submitButton.setBorder(null);
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -245,11 +253,27 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_moreButtonActionPerformed
 
+    public static String getCurrentlocation() {
+        return currentlocation;
+    }
+
+    public static void setCurrentlocation(String currentlocation) {
+        Homepage.currentlocation = currentlocation;
+    }
+
+    public static String getDestinedlocation() {
+        return destinedlocation;
+    }
+
+    public static void setDestinedlocation(String destinedlocation) {
+        Homepage.destinedlocation = destinedlocation;
+    }
+
     private void locationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationButtonActionPerformed
 
         String currentLocation = locationTextField.getText();
         currentLocationPredictions = new AddressAPI().findAddressFromQuery(currentLocation);
-        new PredictionsWindow(currentLocationPredictions).setVisible(true);
+        new PredictionsWindow(currentLocationPredictions, "current").setVisible(true);
 
     }//GEN-LAST:event_locationButtonActionPerformed
 
@@ -257,9 +281,19 @@ public class Homepage extends javax.swing.JFrame {
 
         String destinedLocation = destTextField.getText();
         destinedLocationPredictions = new AddressAPI().findAddressFromQuery(destinedLocation);
-        new PredictionsWindow(destinedLocationPredictions).setVisible(true);
+        new PredictionsWindow(destinedLocationPredictions, "destination").setVisible(true);
 
     }//GEN-LAST:event_destButtonActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+
+        System.out.println("working 1");
+        new NearbyBusStopsAPI().searchBusStopsNearby();
+        System.out.println("working 2");
+
+        new AvailableBusses().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,4 +349,5 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton moreButton;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
+
 }

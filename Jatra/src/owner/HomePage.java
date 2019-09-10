@@ -47,11 +47,9 @@ public class HomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -63,9 +61,6 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(224, 224, 224));
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Dropbox\\SD_PROJECT_2.1\\Jatra\\source\\Jatra\\Images\\Owner\\LocationLogo.png")); // NOI18N
-
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Dropbox\\SD_PROJECT_2.1\\Jatra\\source\\Jatra\\Images\\Owner\\AddBusLogo.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -178,11 +173,9 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 90));
 
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton6.setBorder(null);
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -194,6 +187,8 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        System.out.println("aaa");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
