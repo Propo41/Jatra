@@ -20,6 +20,8 @@ public class PredictionsWindow extends javax.swing.JFrame {
 
     private String type;
 
+    private Homepage homepage;
+
     public PredictionsWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -33,6 +35,15 @@ public class PredictionsWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.type = type;
 
+    }
+
+    public PredictionsWindow(ArrayList<String> query, String type, Homepage homepage) {
+
+        this.homepage = homepage;
+        initComponents();
+        addItemsCB(query);
+        this.setLocationRelativeTo(null);
+        this.type = type;
     }
 
     @SuppressWarnings("unchecked")
@@ -110,24 +121,20 @@ public class PredictionsWindow extends javax.swing.JFrame {
         String str;
         if (type.equals("current")) {
             str = comboBox.getSelectedItem().toString();
-            Homepage.setCurrentlocation(str);
+            homepage.setLocationField(str);
+
             String place_id = AddressAPI.searchPlaceIDFromSelectedAddress(str);
             Location location = new GeoCodeAPI().findCoordinates(place_id);
-
             NearbyBusStopsAPI.setCurrCoordinates(location);
-            // new NearbyBusStopsAPI(location);
-
             System.out.println("LOCATION: " + location.getLat() + " " + location.getLng());
 
         } else {
             str = comboBox.getSelectedItem().toString();
-            Homepage.setDestinedlocation(str);
+            homepage.setDestinationField(str);
+
             String place_id = AddressAPI.searchPlaceIDFromSelectedAddress(str);
             Location location = new GeoCodeAPI().findCoordinates(place_id);
-
             NearbyBusStopsAPI.setDestCoordinates(location);
-
-            //  new NearbyBusStopsAPI(location);
         }
 
         this.setVisible(false);

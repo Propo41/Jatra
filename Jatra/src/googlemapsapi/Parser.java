@@ -7,11 +7,16 @@ package googlemapsapi;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -58,6 +63,42 @@ public class Parser {
     public static GeoCode deSerialize_GeoCode(String jsonString) {
         Gson gson = new Gson();
         return gson.fromJson(jsonString, GeoCode.class);
+
+    }
+
+    public static void outputToFile(BusStops busStops, String type) {
+
+        try {
+            if (type.equals("current")) {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("tempFiles/currentLocation_stops.txt"));
+                int length = busStops.results.size();
+
+                for (int i = 0; i < length; i++) {
+                    writer.write(busStops.results.get(i).getName());
+                    System.out.println("busStop: " + busStops.results.get(i).getName());
+                    writer.newLine();
+                }
+
+                writer.close();
+
+            } else {
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("tempFiles/destLocation_stops.txt"));
+                int length = busStops.results.size();
+
+                for (int i = 0; i < length; i++) {
+                    writer.write(busStops.results.get(i).getName());
+                    writer.newLine();
+                }
+
+                writer.close();
+
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("file writing successful");
 
     }
 

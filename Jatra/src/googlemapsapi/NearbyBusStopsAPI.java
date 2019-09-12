@@ -48,8 +48,9 @@ public class NearbyBusStopsAPI {
 
     /*
     the http url is parsed and deserialized with the help of Parser class.
-    An instance of BusStop class is obtained in the process which is used
-    to write the contents in a text file
+    An instance of BusStop class is obtained in the process which is then sent to
+    the method outputToFile() to write the list of busStops in a temporary text file
+    for later use.
      */
     private void searchForCurrentLocation() {
         String urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -62,8 +63,9 @@ public class NearbyBusStopsAPI {
                 + "key=" + PLACES_API_KEY;
         try {
             jsonString = Parser.convertURLtoString(urlString);
-            System.out.println(jsonString);
+            //  System.out.println(jsonString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
+            Parser.outputToFile(busStop, "current");
             //  System.out.println("success: " + busStop.results.get(0).getName());
 
         } catch (IOException ex) {
@@ -73,9 +75,10 @@ public class NearbyBusStopsAPI {
     }
 
     /*
-    the http url is parsed and deserialized with the help of Parser class.
-    An instance of BusStop class is obtained in the process which is used
-    to write the contents in a text file
+   the http url is parsed and deserialized with the help of Parser class.
+    An instance of BusStop class is obtained in the process which is then sent to
+    the method outputToFile() to write the list of busStops in a temporary text file
+    for later use.
      */
     private void searchForDestLocation() {
 
@@ -91,14 +94,11 @@ public class NearbyBusStopsAPI {
             jsonString = Parser.convertURLtoString(urlString);
             // System.out.println(jsonString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
+            Parser.outputToFile(busStop, "destination");
 
         } catch (IOException ex) {
             Logger.getLogger(NearbyBusStopsAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void outputContentsToFile(BusStops busStops) {
-
     }
 
 }

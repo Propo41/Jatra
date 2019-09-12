@@ -41,9 +41,9 @@ public class Homepage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         locationTextField = new javax.swing.JTextField();
-        locationButton = new javax.swing.JButton();
+        currentSearch = new javax.swing.JButton();
         destTextField = new javax.swing.JTextField();
-        destButton = new javax.swing.JButton();
+        destSearch = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -72,28 +72,33 @@ public class Homepage extends javax.swing.JFrame {
         jLabel8.setText("Enter your destination");
 
         locationTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        locationButton.setBackground(new java.awt.Color(51, 57, 64));
-        locationButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        locationButton.setForeground(new java.awt.Color(255, 255, 255));
-        locationButton.setText("Go");
-        locationButton.setBorder(null);
-        locationButton.addActionListener(new java.awt.event.ActionListener() {
+        locationTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationButtonActionPerformed(evt);
+                locationTextFieldActionPerformed(evt);
+            }
+        });
+
+        currentSearch.setBackground(new java.awt.Color(51, 57, 64));
+        currentSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        currentSearch.setForeground(new java.awt.Color(255, 255, 255));
+        currentSearch.setText("Go");
+        currentSearch.setBorder(null);
+        currentSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentSearchActionPerformed(evt);
             }
         });
 
         destTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        destButton.setBackground(new java.awt.Color(51, 57, 64));
-        destButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        destButton.setForeground(new java.awt.Color(255, 255, 255));
-        destButton.setText("Go");
-        destButton.setBorder(null);
-        destButton.addActionListener(new java.awt.event.ActionListener() {
+        destSearch.setBackground(new java.awt.Color(51, 57, 64));
+        destSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        destSearch.setForeground(new java.awt.Color(255, 255, 255));
+        destSearch.setText("Go");
+        destSearch.setBorder(null);
+        destSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                destButtonActionPerformed(evt);
+                destSearchActionPerformed(evt);
             }
         });
 
@@ -124,13 +129,13 @@ public class Homepage extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(destTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(destButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(destSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel8)
                             .addComponent(jLabel6)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(locationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(currentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(282, 282, 282)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -146,13 +151,13 @@ public class Homepage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(locationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(currentSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(destTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(destButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(destSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
@@ -269,31 +274,43 @@ public class Homepage extends javax.swing.JFrame {
         Homepage.destinedlocation = destinedlocation;
     }
 
-    private void locationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationButtonActionPerformed
+    public void setLocationField(String str) {
+        locationTextField.setText(str);
+
+    }
+
+    public void setDestinationField(String str) {
+        destTextField.setText(str);
+
+    }
+    private void currentSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentSearchActionPerformed
 
         String currentLocation = locationTextField.getText();
         currentLocationPredictions = new AddressAPI().findAddressFromQuery(currentLocation);
-        new PredictionsWindow(currentLocationPredictions, "current").setVisible(true);
+        new PredictionsWindow(currentLocationPredictions, "current", this).setVisible(true);
 
-    }//GEN-LAST:event_locationButtonActionPerformed
+    }//GEN-LAST:event_currentSearchActionPerformed
 
-    private void destButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destButtonActionPerformed
+    private void destSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destSearchActionPerformed
 
         String destinedLocation = destTextField.getText();
         destinedLocationPredictions = new AddressAPI().findAddressFromQuery(destinedLocation);
-        new PredictionsWindow(destinedLocationPredictions, "destination").setVisible(true);
+        new PredictionsWindow(destinedLocationPredictions, "destination", this).setVisible(true);
 
-    }//GEN-LAST:event_destButtonActionPerformed
+    }//GEN-LAST:event_destSearchActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
 
-        System.out.println("working 1");
         new NearbyBusStopsAPI().searchBusStopsNearby();
-        System.out.println("working 2");
+        System.out.println("busStops searched nearby and put into file");
 
         new AvailableBusses().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void locationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_locationTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,7 +348,8 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton destButton;
+    private javax.swing.JButton currentSearch;
+    private javax.swing.JButton destSearch;
     private javax.swing.JTextField destTextField;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -344,7 +362,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton locationButton;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JButton moreButton;
     private javax.swing.JButton submitButton;

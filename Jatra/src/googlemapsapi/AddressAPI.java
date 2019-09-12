@@ -78,7 +78,7 @@ public class AddressAPI {
     }
 
     /*
-    iterates through the AutoComplete obj and checks where the @address is located and
+    iterates through the AutoComplete obj declared in GlobalVariables class and checks where the @address is located and
     then the place_id is found from that list
     returns: the place_id of the address
      */
