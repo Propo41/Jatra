@@ -1,20 +1,7 @@
-College Gate Bus Stop
-Technical Bus Stop
-Bangla College Bus Stop
-Kallyanpur Bus Stop
-PC Culture 12 No Bus Stop
-Darusslam Bus Stop
-Shyamoli Gastola Bus Stand
-WUB Kallyanpur Bus Stop
-Shishu Mela Bus Stop
-Adabor Thana Bus Stand
-Mazar Road Bus Stop
-Adabor Bus Stop
-Kallyanpur Bus Stop
-Shyamoli Bus Stop
-Tolarbag Bus Stop
-Manik Mian Avenue West Bus Stop
-Taronga Bus Stop
-Bhanga Masjid Bus stop
-Shyamoli Bus Stand
-BRTC Bus Stand
+Bottola Bus Stop
+Rajlakshmi Bus Stop
+Prembagan Bus Stop
+Gawair Bus Stop
+Jasimuddin Bus Stop
+Kosai Bazar Bus Stop
+Azampur Bus Stop
