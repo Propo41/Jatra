@@ -15,7 +15,8 @@ public class OwnerPopUp extends javax.swing.JFrame {
      * Creates new form ShowBusStops
      */
     public OwnerPopUp() {
-        initComponents();
+        this.setUndecorated(true);
+        initComponents();   
     }
 
     /**
@@ -41,7 +42,7 @@ public class OwnerPopUp extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(100, 211, 251));
 
-        jLabel1.setText("Profile Picture");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/owner/img/PopUpLogo.png"))); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
@@ -106,7 +107,7 @@ public class OwnerPopUp extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +132,7 @@ public class OwnerPopUp extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         jButton5.setText("Close");
-        jButton5.setBorder(null);
+        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -159,7 +160,7 @@ public class OwnerPopUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

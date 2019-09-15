@@ -5,18 +5,24 @@
  */
 package owner;
 
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import static owner.AddANewBus.profilePopup;
+import passenger.OwnerPopUp;
+
 /**
  *
  * @author Swapnil
  */
-public class HomePage extends javax.swing.JFrame {
+public class HomePage extends javax.swing.JFrame  implements ComponentListener{
 
-    /**
-     * Creates new form ExistingBusses
-     */
+    static OwnerPopUp profilePopup = new OwnerPopUp();
+    
     public HomePage() {
         initComponents();
         this.setLocationRelativeTo(null);
+        addComponentListener(this);
+        validate();
     }
 
     /**
@@ -28,6 +34,7 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton7 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -41,13 +48,25 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/owner/img/DetailsLogo.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
+
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -173,16 +192,6 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 90));
 
-        jButton6.setBorder(null);
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
-
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,6 +208,11 @@ public class HomePage extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        profilePopup.setVisible(true);
+        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +256,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -253,4 +266,21 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+    }
 }

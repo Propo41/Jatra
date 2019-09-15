@@ -5,17 +5,18 @@
  */
 package owner;
 
-/**
- *
- * @author USER
- */
-public class MyProfileOwner extends javax.swing.JFrame {
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import passenger.OwnerPopUp;
 
-    /**
-     * Creates new form MyProfileOwner
-     */
+public class MyProfileOwner extends javax.swing.JFrame implements ComponentListener {
+
+    static OwnerPopUp profilePopup = new OwnerPopUp();
+
     public MyProfileOwner() {
         initComponents();
+        addComponentListener(this);
+        validate();
     }
 
     /**
@@ -96,6 +97,11 @@ public class MyProfileOwner extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
@@ -185,7 +191,6 @@ public class MyProfileOwner extends javax.swing.JFrame {
         myProfileYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" }));
 
         jButton3.setBackground(new java.awt.Color(224, 224, 224));
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Dropbox\\SD_PROJECT_2.1\\Jatra\\source\\Jatra\\Images\\Owner\\UploadLogo.png")); // NOI18N
         jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,12 +363,16 @@ public class MyProfileOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_myProfileMonthComboBoxActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.out.println("Proo");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        profilePopup.setVisible(true);
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,4 +440,21 @@ public class MyProfileOwner extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> myProfileYearComboBox;
     private javax.swing.JButton mySaveChangesButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+    }
 }

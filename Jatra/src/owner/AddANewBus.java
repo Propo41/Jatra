@@ -5,17 +5,22 @@
  */
 package owner;
 
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import passenger.OwnerPopUp;
+
 /**
  *
  * @author USER
  */
-public class AddANewBus extends javax.swing.JFrame {
+public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
 
-    /**
-     * Creates new form AddANewBus
-     */
+    static OwnerPopUp profilePopup = new OwnerPopUp();
+    
     public AddANewBus() {
         initComponents();
+        addComponentListener(this);
+        validate();
     }
 
     /**
@@ -65,6 +70,11 @@ public class AddANewBus extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
         jPanel3.setBackground(new java.awt.Color(51, 57, 64));
@@ -327,6 +337,11 @@ public class AddANewBus extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        profilePopup.setVisible(true);
+        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -388,4 +403,21 @@ public class AddANewBus extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+    }
 }
