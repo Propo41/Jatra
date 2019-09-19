@@ -188,6 +188,7 @@ public class Login extends javax.swing.JFrame {
             String email = emailTextField.getText();
             String password = String.valueOf(passTextField.getPassword());
 
+            //checks if the current email and pass is in the database
             if (!new dataBaseSQL().checkAvailablity(email, password)) {
                 // if credentials doesn't match then open a window
                 new WrongCredentials().setVisible(true);

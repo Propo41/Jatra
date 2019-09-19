@@ -53,7 +53,17 @@ public class dataBaseSQL {
         return null;
     }
 
+    /*
+    after the signup page, all data is uploaded to database from this function
+    the parameters required to be added are all set in the User object user
+    in the constructor
+     */
     public void uploadData() {
+
+        // check the number of entries in the database table. The new entry index to be inserted
+        // in the database is the total count + 1;
+        index = countSize();
+        index++;
 
         System.out.println("index: " + index);
         try {
@@ -73,7 +83,6 @@ public class dataBaseSQL {
                     + " values (" + valuesToInsert + ")";
 
             statement.executeUpdate(sql);
-            index++;
 
         } catch (Exception e) {
             Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, e);
@@ -82,6 +91,33 @@ public class dataBaseSQL {
 
     }
 
+    /*
+    finds the number of rows in the user table.
+     */
+    private int countSize() {
+
+        Connection myConn;
+        int count = -1;
+        try {
+            myConn = DriverManager.getConnection(dbUrl + serviceType + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+            ResultSet rs = statement.executeQuery("select count(*) from user");
+            rs.next();
+            //Moving the cursor to the last row
+            //            System.out.println("Table contains " + rs.getInt("count(*)") + " rows");
+            count = rs.getInt("count(*)");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(dataBaseSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return count;
+
+    }
+
+    /*
+    checks against the database if the user's email and password exists or not.
+     */
     public boolean checkAvailablity(String email, String password) {
 
         if (checkPassenger(email, password)) {
@@ -99,6 +135,11 @@ public class dataBaseSQL {
 
     }
 
+    /*
+    helper method to open a connection to search in the passenger schema
+    if the match is found, the user's current session key is assigned.
+    the current session key is the indexID of the user which is set by using JatraBegins.setKey(key);
+     */
     public boolean checkPassenger(String email, String password) {
         try {
 
@@ -110,6 +151,7 @@ public class dataBaseSQL {
             while (result.next()) {
                 if (result.getString("email").equals(email) && result.getString("password").equals(password)) {
                     key = result.getInt("indexID");
+                    //assigning current session key
                     JatraBegins.setKey(key);
                     return true;
                     //System.out.println("key: " + key);
@@ -123,6 +165,11 @@ public class dataBaseSQL {
         return false;
     }
 
+    /*
+    helper method to open a connection to search in the owner schema
+    if the match is found, the user's current session key is assigned.
+    the current session key is the indexID of the user which is set by using JatraBegins.setKey(key);
+     */
     public boolean checkOwner(String email, String password) {
 
         try {
@@ -135,6 +182,8 @@ public class dataBaseSQL {
             while (result.next()) {
                 if (result.getString("email").equals(email) && result.getString("password").equals(password)) {
                     key = result.getInt("indexID");
+                    //assigning current session key
+
                     JatraBegins.setKey(key);
                     return true;
                     //System.out.println("key: " + key);

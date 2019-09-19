@@ -48,7 +48,7 @@ public class SignUp extends javax.swing.JFrame {
         phoneNumberField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         serviceTypeComboBox = new javax.swing.JComboBox<>();
-        basicDetailsRegisterButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -97,14 +97,14 @@ public class SignUp extends javax.swing.JFrame {
         serviceTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Passenger", "Owner" }));
         serviceTypeComboBox.setBorder(null);
 
-        basicDetailsRegisterButton.setBackground(new java.awt.Color(33, 33, 33));
-        basicDetailsRegisterButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        basicDetailsRegisterButton.setForeground(new java.awt.Color(255, 255, 255));
-        basicDetailsRegisterButton.setText("Register");
-        basicDetailsRegisterButton.setBorder(null);
-        basicDetailsRegisterButton.addActionListener(new java.awt.event.ActionListener() {
+        registerButton.setBackground(new java.awt.Color(33, 33, 33));
+        registerButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(255, 255, 255));
+        registerButton.setText("Register");
+        registerButton.setBorder(null);
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                basicDetailsRegisterButtonActionPerformed(evt);
+                registerButtonActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class SignUp extends javax.swing.JFrame {
                         .addGap(119, 119, 119))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(372, Short.MAX_VALUE)
-                .addComponent(basicDetailsRegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
         jPanel3Layout.setVerticalGroup(
@@ -207,7 +207,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(serviceTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(basicDetailsRegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -275,7 +275,7 @@ public class SignUp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_passwordFieldActionPerformed
 
-    private void basicDetailsRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_basicDetailsRegisterButtonActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         char[] firstPass = passwordField.getPassword();
         char[] secondPass = confirmPasswordField.getPassword();
 
@@ -317,7 +317,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_basicDetailsRegisterButtonActionPerformed
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,7 +356,6 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton basicDetailsRegisterButton;
     private javax.swing.JTextField cityField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField emailField;
@@ -373,6 +372,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField phoneNumberField;
     private javax.swing.JButton previousButton;
+    private javax.swing.JButton registerButton;
     private javax.swing.JComboBox<String> serviceTypeComboBox;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables

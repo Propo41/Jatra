@@ -64,7 +64,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         FarePerStopTextField = new javax.swing.JTextField();
-        addButton = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
         addBusstopButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         conditionComboBox = new javax.swing.JComboBox<>();
@@ -145,14 +145,14 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             }
         });
 
-        addButton.setBackground(new java.awt.Color(51, 57, 64));
-        addButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Add");
-        addButton.setBorder(null);
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        saveChangesButton.setBackground(new java.awt.Color(51, 57, 64));
+        saveChangesButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
+        saveChangesButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveChangesButton.setText("Save");
+        saveChangesButton.setBorder(null);
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                saveChangesButtonActionPerformed(evt);
             }
         });
 
@@ -231,7 +231,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -277,7 +277,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43))))
         );
@@ -375,7 +375,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     first of all everything the user enters will be saved in local variables. When the saves changes
     button is clicked, everything stored in the variables will be saved to the database on another function call
      */
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
 
         //check if the fields are filled, if they are then save it to the database
         if (checkFields()) {
@@ -388,13 +388,14 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             String currentDate = DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
             System.out.println(currentDate);
 
+            //currently the rating system is not implemented. Will be implementing it later on, so, it's set to 0
             bus = new Bus(busName, seats, currentDate, 0, fare, type, condition, busStops);
             System.out.println(bus.getName());
             // now save the bus contents to database based on the key of current user
 
         }
 
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
 
     /*
     the functions returns true if all the fields are filled up and one or more bus Stops have been added else returns false
@@ -470,7 +471,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FarePerStopTextField;
     private javax.swing.JButton addBusstopButton;
-    private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
     private javax.swing.JTextField busNameTextField;
     private javax.swing.JComboBox<String> conditionComboBox;
@@ -489,6 +489,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton moreButton;
+    private javax.swing.JButton saveChangesButton;
     private javax.swing.JTextField targetBusStopsTextField;
     private javax.swing.JTextField totalSeatsTextField;
     private javax.swing.JComboBox<String> typeComboBox;
