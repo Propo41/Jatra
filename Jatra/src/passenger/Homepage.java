@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import passenger.OwnerPopUp;
+import util.popUpWindows.MoreSettings;
 
 /**
  *
@@ -19,8 +19,7 @@ import passenger.OwnerPopUp;
  */
 public class Homepage extends javax.swing.JFrame implements ComponentListener {
 
-    static OwnerPopUp profilePopup = new OwnerPopUp();
-
+    private MoreSettings profilePopup;
     private ArrayList<String> currentLocationPredictions;
     private ArrayList<String> destinedLocationPredictions;
     private static String currentlocation;
@@ -29,7 +28,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     public Homepage() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        profilePopup = new MoreSettings();
         addComponentListener(this);
         validate();
 
@@ -58,8 +57,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        moreButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -195,18 +193,10 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
 
         jSeparator1.setBackground(new java.awt.Color(51, 57, 64));
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        moreButton.setBackground(new java.awt.Color(0, 204, 255));
+        moreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                moreButtonActionPerformed(evt);
             }
         });
 
@@ -218,36 +208,28 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(428, 428, 428)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                .addComponent(moreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
+                        .addComponent(moreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,14 +297,19 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_locationTextFieldActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void moreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        /*
+        the following commented statements caused the buttton animations to stop working
+        it seems that if the object is not created at runtime, then the animations doesnt work
+         */
+        //popup.setVisible(true);
+        //popup.setLocation(this.getX() + this.getWidth(), this.getY());
+        //profilePopup = new OwnerPopUp();
         profilePopup.setVisible(true);
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
-    }//GEN-LAST:event_jButton4ActionPerformed
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
+
+    }//GEN-LAST:event_moreButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,8 +350,6 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private javax.swing.JButton currentSearch;
     private javax.swing.JButton destSearch;
     private javax.swing.JTextField destTextField;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -375,6 +360,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField locationTextField;
+    private javax.swing.JButton moreButton;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 
@@ -384,7 +370,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }
 
     @Override

@@ -1,6 +1,8 @@
 package main;
 
 import googlemapsapi.AddressAPI;
+import util.Login;
+//import util.Login;
 
 public class JatraBegins {
 
@@ -9,9 +11,10 @@ public class JatraBegins {
 
     public static void main(String[] args) {
         //entry point of program
+        Login login = new Login();
+        login.setVisible(true);
 
-        new AddressAPI().findAddressFromQuery("kala");
-
+        // new AddressAPI().findAddressFromQuery("kala");
     }
 
     public static void setKey(int _key) {

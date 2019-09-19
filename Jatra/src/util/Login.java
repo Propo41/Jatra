@@ -48,6 +48,7 @@ public class Login extends javax.swing.JFrame {
         SignUpButton = new javax.swing.JButton();
         GoogleButton = new javax.swing.JButton();
         passTextField = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -123,6 +124,9 @@ public class Login extends javax.swing.JFrame {
         GoogleButton.setBorder(null);
         jPanel2.add(GoogleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 70, 20));
         jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 230, 30));
+
+        jButton1.setText("jButton1");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,6 +249,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton SignUpButton;
     private javax.swing.JTextField emailTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

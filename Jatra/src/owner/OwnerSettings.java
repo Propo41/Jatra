@@ -7,14 +7,12 @@ package owner;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import static owner.AddANewBus.profilePopup;
-import passenger.OwnerPopUp;
+import util.popUpWindows.MoreSettings;
 
-public class OwnerSettings extends javax.swing.JFrame  implements ComponentListener {
+public class OwnerSettings extends javax.swing.JFrame implements ComponentListener {
 
-    static OwnerPopUp profilePopup = new OwnerPopUp();
-    
-    
+    static MoreSettings profilePopup = new MoreSettings();
+
     public OwnerSettings() {
         initComponents();
         addComponentListener(this);
@@ -311,7 +309,7 @@ public class OwnerSettings extends javax.swing.JFrame  implements ComponentListe
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         profilePopup.setVisible(true);
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -321,7 +319,7 @@ public class OwnerSettings extends javax.swing.JFrame  implements ComponentListe
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -383,7 +381,7 @@ public class OwnerSettings extends javax.swing.JFrame  implements ComponentListe
 
     @Override
     public void componentMoved(ComponentEvent e) {
-         profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }
 
     @Override

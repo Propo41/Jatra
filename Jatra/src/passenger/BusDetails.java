@@ -7,13 +7,12 @@ package passenger;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import passenger.OwnerPopUp;
-
-
+import util.popUpWindows.MoreSettings;
 
 public class BusDetails extends javax.swing.JFrame implements ComponentListener {
 
-   static OwnerPopUp profilePopup = new OwnerPopUp();
+    static MoreSettings profilePopup = new MoreSettings();
+
     public BusDetails() {
         initComponents();
         addComponentListener(this);
@@ -143,7 +142,7 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         profilePopup.setVisible(true);
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -198,7 +197,7 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }
 
     @Override

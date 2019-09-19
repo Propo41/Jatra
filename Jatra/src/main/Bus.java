@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Swapnil
@@ -15,16 +18,66 @@ public class Bus {
     private int totalSeats;
     private String registeredDate;
     private double rating;
+    private double fare;
+    private String type;
+    private String condition;
+    private List<String> busStops;
 
-    public Bus(String name, int totalSeats, String registeredDate, double rating) {
+    public Bus() {
+
+        busStops = new ArrayList<>();
+    }
+
+    public Bus(String name, int totalSeats, String registeredDate, double rating, double fare, String type, String condition, List<String> busStops) {
         this.name = name;
         this.totalSeats = totalSeats;
         this.registeredDate = registeredDate;
         this.rating = rating;
+        this.fare = fare;
+        this.type = type;
+        this.condition = condition;
+        this.busStops = busStops;
+
+        System.out.println("Bus entry successfully added locally.");
     }
 
-    public Bus() {
+    public List<String> getBusStops() {
+        return busStops;
+    }
 
+    public void setBusStops(List<String> busStops) {
+        this.busStops = busStops;
+    }
+
+    public void addBusStop(String name) {
+
+        busStops.add(name);
+        System.out.println("bus stop added");
+
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public void setFare(double fare) {
+        this.fare = fare;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
     public String getName() {

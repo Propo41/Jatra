@@ -7,20 +7,38 @@ package owner;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import passenger.OwnerPopUp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import main.Bus;
+import util.popUpWindows.BusStopNeeded;
+import util.popUpWindows.EmptyFields;
+import util.popUpWindows.MoreSettings;
 
 /**
  *
  * @author USER
  */
-public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
+public class AddANewBus extends javax.swing.JFrame implements ComponentListener {
 
-    static OwnerPopUp profilePopup = new OwnerPopUp();
-    
+    private MoreSettings profilePopup;
+    private Bus bus;
+    private List<String> busStops;
+    private int busStopCounter;
+
     public AddANewBus() {
+
         initComponents();
+        busStops = new ArrayList<>();
+
+        busStopCounter = 0;
+        this.setLocationRelativeTo(null);
+
+        profilePopup = new MoreSettings();
         addComponentListener(this);
         validate();
+
     }
 
     /**
@@ -32,26 +50,26 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        moreButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        addBusBusNameTextField = new javax.swing.JTextField();
+        busNameTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        addBusTotalSeatsTextField = new javax.swing.JTextField();
-        addBusTargetBusStopsTextField = new javax.swing.JTextField();
+        totalSeatsTextField = new javax.swing.JTextField();
+        targetBusStopsTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        addBusFarePerStopTextField = new javax.swing.JTextField();
-        addBusSaveChangesButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        FarePerStopTextField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
+        addBusstopButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        addBusBusACComboBox = new javax.swing.JComboBox<String>();
-        addBusSeatingArrangementComboBox = new javax.swing.JComboBox<String>();
+        conditionComboBox = new javax.swing.JComboBox<>();
+        typeComboBox = new javax.swing.JComboBox<>();
+        backButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,22 +78,12 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        moreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                moreButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
-
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
+        getContentPane().add(moreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
 
         jPanel3.setBackground(new java.awt.Color(51, 57, 64));
 
@@ -91,36 +99,36 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
         jLabel3.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel3.setText("Bus Name");
 
-        addBusBusNameTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        addBusBusNameTextField.setToolTipText("");
-        addBusBusNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        addBusBusNameTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        addBusBusNameTextField.setName(""); // NOI18N
-        addBusBusNameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        busNameTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        busNameTextField.setToolTipText("");
+        busNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        busNameTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        busNameTextField.setName(""); // NOI18N
+        busNameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addBusBusNameTextFieldMouseClicked(evt);
+                busNameTextFieldMouseClicked(evt);
             }
         });
-        addBusBusNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        busNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBusBusNameTextFieldActionPerformed(evt);
+                busNameTextFieldActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel4.setText("Total Seats");
 
-        addBusTotalSeatsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        addBusTotalSeatsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        addBusTotalSeatsTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        addBusTotalSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
+        totalSeatsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        totalSeatsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        totalSeatsTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        totalSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBusTotalSeatsTextFieldActionPerformed(evt);
+                totalSeatsTextFieldActionPerformed(evt);
             }
         });
 
-        addBusTargetBusStopsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        addBusTargetBusStopsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        targetBusStopsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        targetBusStopsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel6.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel6.setText("Target Bus Stops");
@@ -128,35 +136,56 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
         jLabel10.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel10.setText("Fare per bus stop passed");
 
-        addBusFarePerStopTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        addBusFarePerStopTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        addBusFarePerStopTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        addBusFarePerStopTextField.addActionListener(new java.awt.event.ActionListener() {
+        FarePerStopTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        FarePerStopTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        FarePerStopTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        FarePerStopTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBusFarePerStopTextFieldActionPerformed(evt);
+                FarePerStopTextFieldActionPerformed(evt);
             }
         });
 
-        addBusSaveChangesButton.setBackground(new java.awt.Color(51, 57, 64));
-        addBusSaveChangesButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
-        addBusSaveChangesButton.setForeground(new java.awt.Color(255, 255, 255));
-        addBusSaveChangesButton.setText("Save Changes");
-        addBusSaveChangesButton.setBorder(null);
+        addButton.setBackground(new java.awt.Color(51, 57, 64));
+        addButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Add");
+        addButton.setBorder(null);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("+");
+        addBusstopButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addBusstopButton.setText("+");
+        addBusstopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBusstopButtonActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel7.setText("Type of Bus");
 
-        addBusBusACComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "Non - AC" }));
-        addBusBusACComboBox.addActionListener(new java.awt.event.ActionListener() {
+        conditionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "Non - AC" }));
+        conditionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBusBusACComboBoxActionPerformed(evt);
+                conditionComboBoxActionPerformed(evt);
             }
         });
 
-        addBusSeatingArrangementComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seating", "Local" }));
+        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seating", "Local" }));
+
+        backButton.setBackground(new java.awt.Color(51, 57, 64));
+        backButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Back");
+        backButton.setBorder(null);
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -173,13 +202,13 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addBusBusNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(busNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(addBusFarePerStopTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(FarePerStopTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(addBusTotalSeatsTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(totalSeatsTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -190,17 +219,19 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
                                 .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(addBusTargetBusStopsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(targetBusStopsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2))
+                                    .addComponent(addBusstopButton))
                                 .addComponent(jLabel7)
                                 .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(addBusBusACComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(addBusSeatingArrangementComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(addBusSaveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -220,32 +251,34 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addBusTargetBusStopsTextField)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                            .addComponent(targetBusStopsTextField)
+                            .addComponent(addBusstopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBusBusNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(busNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBusTotalSeatsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalSeatsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBusFarePerStopTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(FarePerStopTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(addBusBusACComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addBusSeatingArrangementComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addComponent(addBusSaveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43))))
         );
 
@@ -313,34 +346,91 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addBusBusNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBusBusNameTextFieldMouseClicked
+    private void busNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_busNameTextFieldMouseClicked
 
-    }//GEN-LAST:event_addBusBusNameTextFieldMouseClicked
+    }//GEN-LAST:event_busNameTextFieldMouseClicked
 
-    private void addBusBusNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusBusNameTextFieldActionPerformed
+    private void busNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busNameTextFieldActionPerformed
 
-    }//GEN-LAST:event_addBusBusNameTextFieldActionPerformed
+    }//GEN-LAST:event_busNameTextFieldActionPerformed
 
-    private void addBusTotalSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusTotalSeatsTextFieldActionPerformed
+    private void totalSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalSeatsTextFieldActionPerformed
 
-    }//GEN-LAST:event_addBusTotalSeatsTextFieldActionPerformed
+    }//GEN-LAST:event_totalSeatsTextFieldActionPerformed
 
-    private void addBusFarePerStopTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusFarePerStopTextFieldActionPerformed
+    private void FarePerStopTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FarePerStopTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addBusFarePerStopTextFieldActionPerformed
+    }//GEN-LAST:event_FarePerStopTextFieldActionPerformed
 
-    private void addBusBusACComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusBusACComboBoxActionPerformed
+    private void conditionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addBusBusACComboBoxActionPerformed
+    }//GEN-LAST:event_conditionComboBoxActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void moreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreButtonActionPerformed
         profilePopup.setVisible(true);
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
-    }//GEN-LAST:event_jButton4ActionPerformed
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
+    }//GEN-LAST:event_moreButtonActionPerformed
+
+    /*
+    first of all everything the user enters will be saved in local variables. When the saves changes
+    button is clicked, everything stored in the variables will be saved to the database on another function call
+     */
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+
+        //check if the fields are filled, if they are then save it to the database
+        if (checkFields()) {
+            String busName = busNameTextField.getText();
+            int seats = Integer.parseInt(totalSeatsTextField.getText());
+            double fare = Double.parseDouble(FarePerStopTextField.getText());
+            String condition = conditionComboBox.getSelectedItem().toString();
+            String type = typeComboBox.getSelectedItem().toString();
+            LocalDate localDate = LocalDate.now();
+            String currentDate = DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
+            System.out.println(currentDate);
+
+            bus = new Bus(busName, seats, currentDate, 0, fare, type, condition, busStops);
+            System.out.println(bus.getName());
+            // now save the bus contents to database based on the key of current user
+
+        }
+
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    /*
+    the functions returns true if all the fields are filled up and one or more bus Stops have been added else returns false
+     */
+    private boolean checkFields() {
+        if (busNameTextField.getText().isEmpty() || totalSeatsTextField.getText().isEmpty() || FarePerStopTextField.getText().isEmpty()) {
+            new EmptyFields().setVisible(true);
+            return false;
+        } else if (busStopCounter == 0 && targetBusStopsTextField.getText().isEmpty()) {
+            new BusStopNeeded().setVisible(true);
+            return false;
+
+        }
+        return true;
+
+    }
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.setVisible(false);
+        new HomePage().setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void addBusstopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusstopButtonActionPerformed
+
+        if (checkFields()) {
+            if (!targetBusStopsTextField.getText().isEmpty()) {
+                busStops.add(targetBusStopsTextField.getText());
+                busStopCounter++;
+                System.out.println("bus stop added, counter: " + busStopCounter);
+                targetBusStopsTextField.setText("");
+            } else {
+                new BusStopNeeded().setVisible(true);
+
+            }
+        }
+
+    }//GEN-LAST:event_addBusstopButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,7 +439,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -378,16 +468,12 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> addBusBusACComboBox;
-    private javax.swing.JTextField addBusBusNameTextField;
-    private javax.swing.JTextField addBusFarePerStopTextField;
-    private javax.swing.JButton addBusSaveChangesButton;
-    private javax.swing.JComboBox<String> addBusSeatingArrangementComboBox;
-    private javax.swing.JTextField addBusTargetBusStopsTextField;
-    private javax.swing.JTextField addBusTotalSeatsTextField;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextField FarePerStopTextField;
+    private javax.swing.JButton addBusstopButton;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
+    private javax.swing.JTextField busNameTextField;
+    private javax.swing.JComboBox<String> conditionComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -402,6 +488,10 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JButton moreButton;
+    private javax.swing.JTextField targetBusStopsTextField;
+    private javax.swing.JTextField totalSeatsTextField;
+    private javax.swing.JComboBox<String> typeComboBox;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -410,7 +500,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener{
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        profilePopup.setLocation(this.getX()+this.getWidth(),this.getY());
+        profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }
 
     @Override
