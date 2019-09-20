@@ -1,17 +1,29 @@
 package owner;
 
+import googlemapsapi.BusStops;
+import googlemapsapi.Location;
+import googlemapsapi.NearbyBusStopsAPI;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import googlemapsapi.BusStopSuggestion;
 import util.popUpWindows.MoreSettings;
 
 public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
     private MoreSettings profilePopup;
 
+    private List<BusStopSuggestion> choices;
+
     public HomePage() {
 
         initComponents();
-        profilePopup = new MoreSettings();;
+        profilePopup = new MoreSettings();
+        //  findAllBusstops();
+
         this.setLocationRelativeTo(null);
         addComponentListener(this);
         validate();
@@ -163,6 +175,53 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void findAllBusstops() {
+        NearbyBusStopsAPI.setCurrCoordinates(new Location(23.765245, 90.409192));
+
+        List<String> listBusStops = new ArrayList<>();
+        BusStops busStops;
+        String next_token = null;
+
+        while (true) {
+            try {
+                busStops = new NearbyBusStopsAPI(45000).searchBusStopsNearby(next_token);
+                int l = busStops.results.size();
+                next_token = busStops.next_page_token;
+                System.out.println("l = " + l);
+
+                for (int i = 0; i < l; i++) {
+                    listBusStops.add(busStops.results.get(i).getName());
+                }
+
+                if (next_token == null) {
+                    break;
+                }
+
+                //the sleep is necessary because the http pagetoken cause an invalid request if
+                //not delayed. See doc.
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        System.out.println("All bus stops found. Total entries: " + listBusStops.size());
+
+        //for (int i = 0; i < listBusStops.size(); i++) {
+        //System.out.println("finally: " + listBusStops.get(i));
+        // }
+        /*choices = new ArrayList<>();
+        for (int i = 0; i < listBusStops.size(); i++) {
+
+            choices.add(BusStopSuggestion.querySearch(listBusStops.get(i)));
+        }
+         */
+        AddANewBus.listStops = listBusStops;
+        //   AddANewBus.setChoices(choices);
+
+    }
 
     private void addBusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusButtonActionPerformed
 

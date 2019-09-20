@@ -1,7 +1,20 @@
-Bottola Bus Stop
-Rajlakshmi Bus Stop
-Prembagan Bus Stop
-Gawair Bus Stop
-Jasimuddin Bus Stop
-Kosai Bazar Bus Stop
-Azampur Bus Stop
+Kalabagan West Bus Stop
+Basnhundhara City North Bus Stop
+Kalabagan East Bus Stop
+College Gate Bus Stop
+Khejur Bagan Bus Stop
+Farmgate Bus Stop
+Shaheen College Bus Stop
+Shahbagh Bus Stop
+Police Box Bus Stop
+Basnhundhara City South Bus Stop
+Manik Mian Avenue West Bus Stop
+WUB Sukrabad Bus Stop
+Dhanmondi 27 No Bus Stop
+Zia Udyan Bus Stop
+ATCL Bus Stop
+VIP 27 Bus Stop
+Technical Bus Stop
+Kakrail Bus Stop
+TB Gate Bus Stop
+Bangla Motor Bus Stop

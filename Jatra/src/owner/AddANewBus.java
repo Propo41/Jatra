@@ -5,16 +5,22 @@
  */
 package owner;
 
+import googlemapsapi.BusStopSuggestion;
+import googlemapsapi.BusStops;
+import googlemapsapi.Location;
+import googlemapsapi.NearbyBusStopsAPI;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import main.Bus;
@@ -33,19 +39,18 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private Bus bus;
     private List<String> busStops;
     private int busStopCounter;
+    public static List<String> listStops;
 
     public AddANewBus() {
 
         initComponents();
+        entryPoint();
         busStops = new ArrayList<>();
-
         busStopCounter = 0;
         this.setLocationRelativeTo(null);
-
         profilePopup = new MoreSettings();
         addComponentListener(this);
         validate();
-
     }
 
     /**
@@ -111,16 +116,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         busNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         busNameTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         busNameTextField.setName(""); // NOI18N
-        busNameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                busNameTextFieldMouseClicked(evt);
-            }
-        });
-        busNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                busNameTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel4.setText("Total Seats");
@@ -128,11 +123,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         totalSeatsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         totalSeatsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalSeatsTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        totalSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalSeatsTextFieldActionPerformed(evt);
-            }
-        });
 
         targetBusStopsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         targetBusStopsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -146,11 +136,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         FarePerStopTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         FarePerStopTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         FarePerStopTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        FarePerStopTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FarePerStopTextFieldActionPerformed(evt);
-            }
-        });
 
         saveChangesButton.setBackground(new java.awt.Color(51, 57, 64));
         saveChangesButton.setFont(new java.awt.Font("Leelawadee UI", 0, 20)); // NOI18N
@@ -175,11 +160,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel7.setText("Type of Bus");
 
         conditionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "Non - AC" }));
-        conditionComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conditionComboBoxActionPerformed(evt);
-            }
-        });
 
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seating", "Local" }));
 
@@ -353,26 +333,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void busNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_busNameTextFieldMouseClicked
-
-    }//GEN-LAST:event_busNameTextFieldMouseClicked
-
-    private void busNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busNameTextFieldActionPerformed
-
-    }//GEN-LAST:event_busNameTextFieldActionPerformed
-
-    private void totalSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalSeatsTextFieldActionPerformed
-
-    }//GEN-LAST:event_totalSeatsTextFieldActionPerformed
-
-    private void FarePerStopTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FarePerStopTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FarePerStopTextFieldActionPerformed
-
-    private void conditionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_conditionComboBoxActionPerformed
-
     private void moreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreButtonActionPerformed
         profilePopup.setVisible(true);
         profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
@@ -440,7 +400,95 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
 
     }//GEN-LAST:event_addBusstopButtonActionPerformed
 
-    public static void main(String args[]) {
+    /*
+    since each application has only one entry point(ie main method), the main method of this class
+    wont get called. So, in place of that, the following function is used to do the job of the main method
+    The autocomplete() method needs to run on a thread
+     */
+    public void entryPoint() {
+
+        findAllBusstops();
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                // new AddANewBus().setVisible(true);
+                autocomplete();
+
+            }
+        });
+
+        System.out.println("inside external main thread of homepage");
+    }
+
+    /*
+    this shit took me a freaking whole day!
+    called implicitly from the method entryPoint() to find all bus stops around a 45k m radius from the center of DHAKA city
+    the list of bus stops is stored in a list of string: listStops
+    NOTE: the number of entries varies from time to time depending on the network. the delay is required as a result.
+    A higher delay would increase the chance of all the lists to come successfully, but reduces the speed of the program
+
+     */
+    private void findAllBusstops() {
+
+        NearbyBusStopsAPI.setCurrCoordinates(new Location(23.765245, 90.409192));
+        BusStops busStops;
+        String next_token = null;
+
+        listStops = new ArrayList<>();
+        while (true) {
+            try {
+                busStops = new NearbyBusStopsAPI(45000).searchBusStopsNearby(next_token);
+                int l = busStops.results.size();
+                next_token = busStops.next_page_token;
+                System.out.println("l = " + l);
+
+                for (int i = 0; i < l; i++) {
+                    listStops.add(busStops.results.get(i).getName());
+                }
+
+                if (next_token == null) {
+                    break;
+                }
+
+                //the sleep is necessary because the http pagetoken causes an invalid request if
+                //not delayed. See doc.
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        System.out.println("All bus stops found. Total entries: " + listStops.size());
+
+    }
+
+    public static void main(String args[]) throws InterruptedException, InvocationTargetException {
+
+        System.out.println("inside main thread of homepage");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -468,23 +516,13 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddANewBus().setVisible(true);
-                autocomplete();
-
+                System.out.println("gui thread running");
+                // autocomplete();
             }
         });
-    }
 
-    protected static final class BusStopSuggestion {
+        System.out.println("inside external main thread of homepage");
 
-        public String stopName;
-
-        public BusStopSuggestion(String stopName) {
-            this.stopName = stopName;
-        }
-    }
-
-    private static BusStopSuggestion querySearch(String query) {
-        return new BusStopSuggestion(query);
     }
 
     /*
@@ -495,18 +533,14 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
      */
     public static void autocomplete() {
 
-        final List<BusStopSuggestion> choices = new ArrayList<>();
+        //converting the List of String- listStops to an object of BusStopSuggesstion for the autocompletion stuff to work
+        List<BusStopSuggestion> choices = new ArrayList<>();
+        for (int i = 0; i < listStops.size(); i++) {
+            choices.add(BusStopSuggestion.querySearch(listStops.get(i)));
+        }
 
-        choices.addAll(Arrays.asList(
-                querySearch("kalabagan"),
-                querySearch("kathalbaghan"), querySearch("dhanmondi"),
-                querySearch("mohammadpur")));
+        final AutoCompleteBehaviour<BusStopSuggestion> autoComplete = new AutoCompleteBehaviour<>();
 
-        final AutoCompleteBehaviour<BusStopSuggestion> autoComplete = new AutoCompleteBehaviour<BusStopSuggestion>();
-
-        // add callback that will generate proposals
-        // and map the user's selection back to what will
-        // be inserted into the JEditorPane
         autoComplete.setCallback(new AutoCompleteBehaviour.DefaultAutoCompleteCallback<BusStopSuggestion>() {
             @Override
             public List<BusStopSuggestion> getProposals(String input) {
@@ -514,15 +548,15 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                     return Collections.emptyList();
                 }
                 final String lower = input.toLowerCase();
-
                 final List<BusStopSuggestion> result = new ArrayList<>();
                 for (BusStopSuggestion c : choices) {
-                    if (c.stopName.contains(lower)) {
-                        System.out.println("inserting");
+                    String temp = c.stopName.toLowerCase();
+                    if (temp.contains(lower)) {
                         result.add(c);
+                    } else {
+                        // System.out.println("not inserting because : " + lower + " " + temp);
                     }
                 }
-                System.out.println("result: " + result.get(0).stopName);
                 return result;
             }
 
@@ -543,7 +577,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         autoComplete.setListCellRenderer(renderer);
 
         // setup initial size
-        autoComplete.setInitialPopupSize(new Dimension(1000, 1000));
+        autoComplete.setInitialPopupSize(new Dimension(100, 300));
         // how many proposals to display before showing a scroll bar
         autoComplete.setVisibleRowCount(10);
         autoComplete.attachTo(targetBusStopsTextField);

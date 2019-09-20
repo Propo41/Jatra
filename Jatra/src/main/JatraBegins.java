@@ -11,8 +11,7 @@ public class JatraBegins {
 
     public static void main(String[] args) {
         //entry point of program
-        Login login = new Login();
-        login.setVisible(true);
+        new Login().setVisible(true);
 
         // new AddressAPI().findAddressFromQuery("kala");
     }
@@ -24,7 +23,7 @@ public class JatraBegins {
 
     public static void setUser(String _user) {
         user = _user;
-        System.out.println("type of user session: " + user);
+        //System.out.println("type of user session: " + user);
     }
 
     public static String getUser() {
