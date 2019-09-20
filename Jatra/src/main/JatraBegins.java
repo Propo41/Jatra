@@ -23,7 +23,7 @@ public class JatraBegins {
 
     public static void setUser(String _user) {
         user = _user;
-        //System.out.println("type of user session: " + user);
+        System.out.println("type of user session: " + user);
     }
 
     public static String getUser() {

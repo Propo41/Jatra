@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import main.Bus;
+import main.User;
 import util.AutoCompleteBehaviour;
 import util.popUpWindows.BusStopNeeded;
 import util.popUpWindows.EmptyFields;
@@ -357,8 +358,9 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
 
             //currently the rating system is not implemented. Will be implementing it later on, so, it's set to 0
             bus = new Bus(busName, seats, currentDate, 0, fare, type, condition, busStops);
-            System.out.println(bus.getName());
             // now save the bus contents to database based on the key of current user
+
+            new database.dataBaseSQL("owner").uploadDataOwner(bus);
 
         }
 

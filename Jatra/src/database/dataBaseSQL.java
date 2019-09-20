@@ -6,8 +6,10 @@
 package database;
 
 import java.sql.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.Bus;
 import main.JatraBegins;
 import main.User;
 
@@ -30,6 +32,11 @@ public class dataBaseSQL {
         this.user = user;
         dbUrl = "jdbc:mysql://localhost:3306/";
 
+    }
+
+    public dataBaseSQL(String serviceType) {
+        this.serviceType = serviceType;
+        dbUrl = "jdbc:mysql://localhost:3306/";
     }
 
     public dataBaseSQL() {
@@ -90,6 +97,46 @@ public class dataBaseSQL {
         }
 
     }
+
+    public void uploadDataOwner(Bus bus) {
+        System.out.println("uploading data to databse");
+        uploadDataForBus(bus);
+        // uploadDataForBusStops(bus.getBusStops());
+
+    }
+
+    private void uploadDataForBus(Bus bus) {
+
+        try {
+            System.out.println("db: " + dbUrl);
+            Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+
+            String valuesToInsert = "'"
+                    + bus.getName() + "', '"
+                    + bus.getTotalSeats() + "', '"
+                    + bus.getRating() + "', '"
+                    + bus.getRegisteredDate() + "', '"
+                    + bus.getCondition() + "', '"
+                    + bus.getFare() + "', '"
+                    + JatraBegins.getKey() + "'";
+
+            String sql = "insert into bus_list "
+                    + " (name, seats, rating, date, condition, fare, type, indexID)"
+                    + " values (" + valuesToInsert + ")";
+
+            statement.executeUpdate(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void uploadDataForBusStops(List<String> stopList) {
+
+    }
+
 
     /*
     finds the number of rows in the user table.
