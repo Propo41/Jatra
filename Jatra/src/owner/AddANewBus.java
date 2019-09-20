@@ -5,13 +5,20 @@
  */
 package owner;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import main.Bus;
+import util.AutoCompleteBehaviour;
 import util.popUpWindows.BusStopNeeded;
 import util.popUpWindows.EmptyFields;
 import util.popUpWindows.MoreSettings;
@@ -433,9 +440,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
 
     }//GEN-LAST:event_addBusstopButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -464,8 +468,86 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddANewBus().setVisible(true);
+                autocomplete();
+
             }
         });
+    }
+
+    protected static final class BusStopSuggestion {
+
+        public String stopName;
+
+        public BusStopSuggestion(String stopName) {
+            this.stopName = stopName;
+        }
+    }
+
+    private static BusStopSuggestion querySearch(String query) {
+        return new BusStopSuggestion(query);
+    }
+
+    /*
+    contains code for the autocompletion on the text field
+    the function is called from the main thread
+    there will also be a thread that checks repeatedly if any text is written and
+    in real time, google maps api will be used to return autocomplete queries.
+     */
+    public static void autocomplete() {
+
+        final List<BusStopSuggestion> choices = new ArrayList<>();
+
+        choices.addAll(Arrays.asList(
+                querySearch("kalabagan"),
+                querySearch("kathalbaghan"), querySearch("dhanmondi"),
+                querySearch("mohammadpur")));
+
+        final AutoCompleteBehaviour<BusStopSuggestion> autoComplete = new AutoCompleteBehaviour<BusStopSuggestion>();
+
+        // add callback that will generate proposals
+        // and map the user's selection back to what will
+        // be inserted into the JEditorPane
+        autoComplete.setCallback(new AutoCompleteBehaviour.DefaultAutoCompleteCallback<BusStopSuggestion>() {
+            @Override
+            public List<BusStopSuggestion> getProposals(String input) {
+                if (input.length() < 2) {
+                    return Collections.emptyList();
+                }
+                final String lower = input.toLowerCase();
+
+                final List<BusStopSuggestion> result = new ArrayList<>();
+                for (BusStopSuggestion c : choices) {
+                    if (c.stopName.contains(lower)) {
+                        System.out.println("inserting");
+                        result.add(c);
+                    }
+                }
+                System.out.println("result: " + result.get(0).stopName);
+                return result;
+            }
+
+            @Override
+            public String getStringToInsert(BusStopSuggestion person) {
+                return person.stopName;
+            }
+        });
+
+        final DefaultListCellRenderer renderer = new DefaultListCellRenderer() {
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                final Component result = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                final BusStopSuggestion p = (BusStopSuggestion) value;
+                setText(p.stopName);
+                return result;
+            }
+        };
+        autoComplete.setListCellRenderer(renderer);
+
+        // setup initial size
+        autoComplete.setInitialPopupSize(new Dimension(1000, 1000));
+        // how many proposals to display before showing a scroll bar
+        autoComplete.setVisibleRowCount(10);
+        autoComplete.attachTo(targetBusStopsTextField);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -490,7 +572,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton moreButton;
     private javax.swing.JButton saveChangesButton;
-    private javax.swing.JTextField targetBusStopsTextField;
+    private static javax.swing.JTextField targetBusStopsTextField;
     private javax.swing.JTextField totalSeatsTextField;
     private javax.swing.JComboBox<String> typeComboBox;
     // End of variables declaration//GEN-END:variables
