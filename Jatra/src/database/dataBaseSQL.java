@@ -31,18 +31,24 @@ public class dataBaseSQL {
 
         this.serviceType = user.getServiceType();
         this.user = user;
-        dbUrl = "jdbc:mysql://localhost:3306/";
+        //  dbUrl = "jdbc:mysql://localhost:3306/";
+
+        dbUrl = "jdbc:mysql://127.0.0.1:3306/";
 
     }
 
     public dataBaseSQL(String serviceType) {
         this.serviceType = serviceType;
-        dbUrl = "jdbc:mysql://localhost:3306/";
+        //dbUrl = "jdbc:mysql://localhost:3306/";
+        dbUrl = "jdbc:mysql://127.0.0.1:3306/";
+
     }
 
     public dataBaseSQL() {
 
-        dbUrl = "jdbc:mysql://localhost:3306/";
+        // dbUrl = "jdbc:mysql://localhost:3306/";
+        dbUrl = "jdbc:mysql://127.0.0.1:3306/";
+
     }
 
     public void setDbURL(String dbUrl) {
@@ -219,6 +225,7 @@ public class dataBaseSQL {
      */
     public boolean checkAvailablity(String email, String password) {
 
+        System.out.println("searching for entered info in databse");
         if (checkPassenger(email, password)) {
             JatraBegins.setUser("passenger");
             return true;
