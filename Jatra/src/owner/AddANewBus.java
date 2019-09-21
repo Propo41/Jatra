@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import main.Bus;
+import main.JatraBegins;
 import main.User;
 import util.AutoCompleteBehaviour;
 import util.popUpWindows.BusStopNeeded;
@@ -383,7 +384,8 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     }
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.setVisible(false);
-        new HomePage().setVisible(true);
+        JatraBegins.getHOMEPAGE().setVisible(true);
+        //  new HomePage().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addBusstopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusstopButtonActionPerformed
@@ -406,10 +408,15 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     since each application has only one entry point(ie main method), the main method of this class
     wont get called. So, in place of that, the following function is used to do the job of the main method
     The autocomplete() method needs to run on a thread
+    the implicit call to findAllBusStops() is handled with a condition. For each session this method will be called only once
      */
     public void entryPoint() {
 
-        findAllBusstops();
+        if (!JatraBegins.isCURRENT_SESSION()) {
+            findAllBusstops();
+        } else {
+            JatraBegins.setCURRENT_SESSION(true);
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

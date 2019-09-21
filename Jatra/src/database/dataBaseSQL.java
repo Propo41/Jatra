@@ -25,6 +25,7 @@ public class dataBaseSQL {
     private String serviceType;
     private User user;
     private static int index = 0;
+    private int busID;
 
     public dataBaseSQL(User user) {
 
@@ -48,17 +49,6 @@ public class dataBaseSQL {
         this.dbUrl = dbUrl;
     }
 
-    public String searchQuery(int index) {
-
-        /*
-        to select individual items based on their index use the command :
-            SELECT * FROM passenger.user
-            WHERE indexID = 0;
-        Also, while inserting data into the database, increment index value by 1
-
-         */
-        return null;
-    }
 
     /*
     after the signup page, all data is uploaded to database from this function
@@ -98,17 +88,23 @@ public class dataBaseSQL {
 
     }
 
+    /*
+    uploads data to the databse and finds the total entries of bus
+
+     */
     public void uploadDataOwner(Bus bus) {
         System.out.println("uploading data to databse");
+        findTotalEntriesOfBusses();
         uploadDataForBus(bus);
-        // uploadDataForBusStops(bus.getBusStops());
+        uploadDataForBusStops(bus.getBusStops());
 
     }
 
     private void uploadDataForBus(Bus bus) {
 
         try {
-            System.out.println("db: " + dbUrl);
+            //System.out.println("db: " + dbUrl);
+            System.out.println("busid: " + busID);
             Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
 
@@ -119,21 +115,77 @@ public class dataBaseSQL {
                     + bus.getRegisteredDate() + "', '"
                     + bus.getCondition() + "', '"
                     + bus.getFare() + "', '"
-                    + JatraBegins.getKey() + "'";
+                    + bus.getType() + "', '"
+                    + JatraBegins.getKey() + "', '"
+                    + busID + "'";
 
-            String sql = "insert into bus_list "
-                    + " (name, seats, rating, date, condition, fare, type, indexID)"
-                    + " values (" + valuesToInsert + ")";
-
+            String sql = "insert into bus_list VALUES ("
+                    + valuesToInsert
+                    + ")";
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        System.out.println("successfully uploaded to database.owner.bus_list");
+
     }
 
     private void uploadDataForBusStops(List<String> stopList) {
+
+        try {
+
+            Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+
+            for (int i = 0; i < stopList.size(); i++) {
+
+                String sql = "insert into target_stops VALUES ('"
+                        + stopList.get(i) + "', '"
+                        + busID + "')";
+
+                statement.executeUpdate(sql);
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        System.out.println("successfully uploaded to database.owner.target_stops");
+
+    }
+
+    /*
+    the method finds the highest value of the column "busID" from bus_list table.
+    implicitly called from uploadDataOwner
+
+     */
+    private void findTotalEntriesOfBusses() {
+
+        try {
+
+            Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+            String sql = "select max(busID) as 'max' from bus_list;";
+            ResultSet result = statement.executeQuery(sql);
+            //the cursor points to -1. so this next() neeeds to be called
+            result.next();
+
+            String str;
+            if ((str = result.getString("max")) != null) {
+                busID = Integer.parseInt(str);
+                busID++;
+
+            } else {
+                busID = 1;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
     }
 

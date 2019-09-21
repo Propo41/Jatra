@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import googlemapsapi.BusStopSuggestion;
+import main.JatraBegins;
 import util.popUpWindows.MoreSettings;
 
 public class HomePage extends javax.swing.JFrame implements ComponentListener {
@@ -227,6 +228,8 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
         System.out.println("opening add bus menu");
         new AddANewBus().setVisible(true);
+        this.setVisible(false);
+        JatraBegins.setHOMEPAGE(this);
 
     }//GEN-LAST:event_addBusButtonActionPerformed
 
