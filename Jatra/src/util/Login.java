@@ -48,7 +48,6 @@ public class Login extends javax.swing.JFrame {
         SignUpButton = new javax.swing.JButton();
         GoogleButton = new javax.swing.JButton();
         passTextField = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -100,8 +99,10 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel2.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 140, 30));
 
-        emailTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
-        emailTextField.setForeground(new java.awt.Color(0, 253, 251));
+        emailTextField.setBackground(new java.awt.Color(102, 102, 102));
+        emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailTextField.setForeground(new java.awt.Color(255, 255, 255));
+        emailTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         emailTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 230, 30));
 
@@ -123,30 +124,34 @@ public class Login extends javax.swing.JFrame {
         GoogleButton.setText("Google");
         GoogleButton.setBorder(null);
         jPanel2.add(GoogleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 70, 20));
-        jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 230, 30));
 
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+        passTextField.setBackground(new java.awt.Color(102, 102, 102));
+        passTextField.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        passTextField.setForeground(new java.awt.Color(255, 255, 255));
+        passTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        passTextField.setHighlighter(null);
+        jPanel2.add(passTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 230, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(96, 96, 96)
+                .addGap(179, 179, 179)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(192, 192, 192)
+                .addGap(230, 230, 230)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -155,7 +160,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +255,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton SignUpButton;
     private javax.swing.JTextField emailTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

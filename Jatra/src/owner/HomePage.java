@@ -16,15 +16,13 @@ import util.popUpWindows.MoreSettings;
 public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
     private MoreSettings profilePopup;
-
     private List<BusStopSuggestion> choices;
 
     public HomePage() {
 
         initComponents();
         profilePopup = new MoreSettings();
-        //  findAllBusstops();
-
+        JatraBegins.setHOMEPAGE(this);
         this.setLocationRelativeTo(null);
         addComponentListener(this);
         validate();
@@ -42,6 +40,8 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         existingBusButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -62,45 +62,69 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
         jPanel4.setBackground(new java.awt.Color(224, 224, 224));
 
+        showBusStopsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBusStopsButtonActionPerformed(evt);
+            }
+        });
+
+        addBusButton.setText("+");
         addBusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBusButtonActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel2.setText("Add a new Bus");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel3.setText("Show bus stops");
 
         existingBusButton.setBackground(new java.awt.Color(255, 255, 255));
-        existingBusButton.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
+        existingBusButton.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         existingBusButton.setText("My Existing Busses");
         existingBusButton.setBorder(null);
+
+        jLabel4.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Welcome back User!");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(173, 173, 173)
                 .addComponent(jLabel2)
-                .addGap(129, 129, 129)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(existingBusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(addBusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(showBusStopsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(149, 149, 149))
+                .addContainerGap(154, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(168, 168, 168))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(existingBusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(addBusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(showBusStopsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(149, 149, 149))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(showBusStopsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,14 +144,14 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 740, 490));
@@ -177,59 +201,11 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void findAllBusstops() {
-        NearbyBusStopsAPI.setCurrCoordinates(new Location(23.765245, 90.409192));
-
-        List<String> listBusStops = new ArrayList<>();
-        BusStops busStops;
-        String next_token = null;
-
-        while (true) {
-            try {
-                busStops = new NearbyBusStopsAPI(45000).searchBusStopsNearby(next_token);
-                int l = busStops.results.size();
-                next_token = busStops.next_page_token;
-                System.out.println("l = " + l);
-
-                for (int i = 0; i < l; i++) {
-                    listBusStops.add(busStops.results.get(i).getName());
-                }
-
-                if (next_token == null) {
-                    break;
-                }
-
-                //the sleep is necessary because the http pagetoken cause an invalid request if
-                //not delayed. See doc.
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-        System.out.println("All bus stops found. Total entries: " + listBusStops.size());
-
-        //for (int i = 0; i < listBusStops.size(); i++) {
-        //System.out.println("finally: " + listBusStops.get(i));
-        // }
-        /*choices = new ArrayList<>();
-        for (int i = 0; i < listBusStops.size(); i++) {
-
-            choices.add(BusStopSuggestion.querySearch(listBusStops.get(i)));
-        }
-         */
-        AddANewBus.listStops = listBusStops;
-        //   AddANewBus.setChoices(choices);
-
-    }
-
     private void addBusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusButtonActionPerformed
 
         System.out.println("opening add bus menu");
         new AddANewBus().setVisible(true);
         this.setVisible(false);
-        JatraBegins.setHOMEPAGE(this);
 
     }//GEN-LAST:event_addBusButtonActionPerformed
 
@@ -238,6 +214,11 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         profilePopup.setVisible(true);
         profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_moreButtonActionPerformed
+
+    private void showBusStopsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBusStopsButtonActionPerformed
+        new ShowBusStops().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_showBusStopsButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -278,11 +259,13 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton moreButton;
     private javax.swing.JButton showBusStopsButton;
     // End of variables declaration//GEN-END:variables

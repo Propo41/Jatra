@@ -19,6 +19,7 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
 
     public ShowBusStops() {
         initComponents();
+        this.setLocationRelativeTo(null);
         addComponentListener(this);
         validate();
     }

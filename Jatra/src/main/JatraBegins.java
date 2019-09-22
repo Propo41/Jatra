@@ -1,14 +1,37 @@
 package main;
 
-import googlemapsapi.AddressAPI;
 import owner.HomePage;
 import util.Login;
-//import util.Login;
+import passenger.Homepage;
 
+/*
+Collapse (hide) a block                     Ctrl + Minus
+Collapse (hide) a block                     Ctrl + NumPad Minus
+
+Collapse (hide) all code blocks             Ctrl + Shift + NumPad Minus
+Expand all code blocks (expand-all-folds)   Ctrl + Shift + NumPad Plus
+
+Expand a Collapsed Block (expand-fold)      Ctrl + Plus
+Expand a Collapsed Block (expand-fold)      Ctrl + NumPad Plus
+Expand a Collapsed Block (expand-fold)      Ctrl + Equals
+Expand all code blocks (expand-all-folds)   Ctrl + Shift + Plus
+Expand all code blocks (expand-all-folds)   Ctrl + Shift + Equals
+ */
+ /*
+  Database details:
+-------------------------
+hostname: 35.240.151.216
+port: 3306
+username: root
+pass: root
+connectionName: jatraServer
+ */
 public class JatraBegins {
 
     private static int key;
     private static String user;
+    private static passenger.Homepage passenger_homepage;
+
     private static owner.HomePage HOMEPAGE;
     private static boolean CURRENT_SESSION = false;
 
@@ -17,6 +40,14 @@ public class JatraBegins {
         new Login().setVisible(true);
 
         // new AddressAPI().findAddressFromQuery("kala");
+    }
+
+    public static Homepage getPassenger_homepage() {
+        return passenger_homepage;
+    }
+
+    public static void setPassenger_homepage(Homepage passenger_homepage) {
+        JatraBegins.passenger_homepage = passenger_homepage;
     }
 
     public static void setKey(int _key) {

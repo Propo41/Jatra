@@ -5,17 +5,45 @@
  */
 package util.popUpWindows;
 
+import com.sun.org.apache.xerces.internal.impl.XMLScanner;
+import main.JatraBegins;
+import util.MyProfile;
+import util.Settings;
+
 /**
  *
  * @author Swapnil
  */
 public class MoreSettings extends javax.swing.JFrame {
 
+    private String userType;
+    private owner.HomePage homepage_owner;
+    private passenger.Homepage homepage_passenger;
+
     /**
      * Creates new form ShowBusStops
      */
     public MoreSettings() {
+        commonInstructions();
+    }
+
+    public MoreSettings(owner.HomePage obj) {
+        homepage_owner = obj;
+        commonInstructions();
+
+    }
+
+    public MoreSettings(passenger.Homepage obj) {
+        homepage_passenger = obj;
+        homepage_passenger.setVisible(false);
+
+        commonInstructions();
+
+    }
+
+    private void commonInstructions() {
         this.setUndecorated(true);
+        setUserType();
         initComponents();
     }
 
@@ -31,10 +59,10 @@ public class MoreSettings extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        myProfileButton = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
+        helpButton = new javax.swing.JButton();
+        signOut = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,43 +76,43 @@ public class MoreSettings extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
         jLabel2.setText("User Name");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        jButton1.setText("My Profile");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        myProfileButton.setBackground(new java.awt.Color(255, 255, 255));
+        myProfileButton.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        myProfileButton.setText("My Profile");
+        myProfileButton.setBorder(null);
+        myProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                myProfileButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        jButton2.setText("Settings");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        settingsButton.setBackground(new java.awt.Color(255, 255, 255));
+        settingsButton.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsButton.setText("Settings");
+        settingsButton.setBorder(null);
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                settingsButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        jButton3.setText("Help");
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        helpButton.setBackground(new java.awt.Color(255, 255, 255));
+        helpButton.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        helpButton.setText("Help");
+        helpButton.setBorder(null);
+        helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                helpButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
-        jButton4.setText("Sign Out");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        signOut.setBackground(new java.awt.Color(255, 255, 255));
+        signOut.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        signOut.setText("Sign Out");
+        signOut.setBorder(null);
+        signOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                signOutActionPerformed(evt);
             }
         });
 
@@ -97,10 +125,10 @@ public class MoreSettings extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(myProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(signOut, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -117,13 +145,13 @@ public class MoreSettings extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(myProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signOut, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -143,21 +171,45 @@ public class MoreSettings extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void setUserType() {
+        userType = JatraBegins.getUser();
+        //userType = "passenger";
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void myProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        //System.out.println("printing object: " + JatraBegins.getPassenger_homepage());
+        if (userType.equals("owner")) {
+            JatraBegins.getHOMEPAGE().setVisible(false);
+            // homepage_owner.setVisible(false);
+        } else {
+            //homepage_passenger.setVisible(false);
+            JatraBegins.getPassenger_homepage().setVisible(false);
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        }
+        new MyProfile().setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_myProfileButtonActionPerformed
+
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        if (userType.equals("owner")) {
+            homepage_owner.setVisible(false);
+        } else {
+            homepage_passenger.setVisible(false);
+        }
+        new Settings().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_settingsButtonActionPerformed
+
+    private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
+        //design not yet implemented
+    }//GEN-LAST:event_helpButtonActionPerformed
+
+    private void signOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signOutActionPerformed
+        new SigningOut(this).setVisible(true);
+
+    }//GEN-LAST:event_signOutActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
@@ -204,12 +256,12 @@ public class MoreSettings extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton helpButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton myProfileButton;
+    private javax.swing.JButton settingsButton;
+    private javax.swing.JButton signOut;
     // End of variables declaration//GEN-END:variables
 }

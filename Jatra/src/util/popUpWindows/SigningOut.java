@@ -5,17 +5,26 @@
  */
 package util.popUpWindows;
 
+import main.JatraBegins;
+import util.Login;
+
 /**
  *
  * @author USER
  */
 public class SigningOut extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SigningOut
-     */
+    MoreSettings settings;
+
+    public SigningOut(MoreSettings settings) {
+        this.settings = settings;
+        initComponents();
+        this.setLocationRelativeTo(null);
+    }
+
     public SigningOut() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -105,11 +114,21 @@ public class SigningOut extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signingOutYesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signingOutYesButtonActionPerformed
-        // TODO add your handling code here:
+
+        if (JatraBegins.getUser().equals("owner")) {
+
+            JatraBegins.getHOMEPAGE().setVisible(false);
+        } else {
+            JatraBegins.getPassenger_homepage().setVisible(false);
+        }
+        settings.setVisible(false);
+        this.setVisible(false);
+        new Login().setVisible(true);
     }//GEN-LAST:event_signingOutYesButtonActionPerformed
 
     private void signingOutNoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signingOutNoButtonActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        settings.setVisible(false);
     }//GEN-LAST:event_signingOutNoButtonActionPerformed
 
     /**

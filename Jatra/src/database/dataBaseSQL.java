@@ -20,7 +20,7 @@ import main.User;
 public class dataBaseSQL {
 
     private final String username = "root";
-    private final String password = "microlab123";
+    private final String password = "root";
     private String dbUrl;
     private String serviceType;
     private User user;
@@ -31,27 +31,25 @@ public class dataBaseSQL {
 
         this.serviceType = user.getServiceType();
         this.user = user;
-        dbUrl = "jdbc:mysql://localhost:3306/";
+        setDbURL();
 
-        //   dbUrl = "jdbc:mysql://127.0.0.1:3306/";
     }
 
     public dataBaseSQL(String serviceType) {
         this.serviceType = serviceType;
-        dbUrl = "jdbc:mysql://localhost:3306/";
-        // dbUrl = "jdbc:mysql://127.0.0.1:3306/";
+        setDbURL();
 
     }
 
     public dataBaseSQL() {
 
-        dbUrl = "jdbc:mysql://localhost:3306/";
-        //dbUrl = "jdbc:mysql://127.0.0.1:3306/";
+        setDbURL();
 
     }
 
-    public void setDbURL(String dbUrl) {
-        this.dbUrl = dbUrl;
+    public void setDbURL() {
+        //this.dbUrl = "jdbc:mysql://localhost:3306/";
+        this.dbUrl = "jdbc:mysql://35.240.151.216:3306/";
     }
 
 
@@ -300,6 +298,14 @@ public class dataBaseSQL {
 
         }
         return false;
+
+    }
+
+    /*
+    iterates thru the databse and finds all the busStops that each bus travels through
+    stores the result in a map <busstop, busid> object
+     */
+    public void searchBusStops() {
 
     }
 

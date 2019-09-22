@@ -1,6 +1,5 @@
 package util;
 
-
 public class MyProfile extends javax.swing.JFrame {
 
     /**
@@ -8,9 +7,11 @@ public class MyProfile extends javax.swing.JFrame {
      */
     public MyProfile() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
-    
-    String date, month , year;
+
+    String date, month, year;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -326,7 +327,7 @@ public class MyProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void myProfileDayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileDayComboBoxActionPerformed
-        
+
     }//GEN-LAST:event_myProfileDayComboBoxActionPerformed
 
     private void myProfileMonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileMonthComboBoxActionPerformed
@@ -342,11 +343,11 @@ public class MyProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_myAddImageTextFieldActionPerformed
 
     private void myProfileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileNameTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_myProfileNameTextFieldActionPerformed
 
     private void myProfileNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myProfileNameTextFieldMouseClicked
-       
+
     }//GEN-LAST:event_myProfileNameTextFieldMouseClicked
 
     /**
@@ -356,7 +357,7 @@ public class MyProfile extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

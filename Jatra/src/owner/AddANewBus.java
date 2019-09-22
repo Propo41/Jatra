@@ -43,6 +43,8 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private int busStopCounter;
     public static List<String> listStops;
 
+    private int delay = 1500;
+
     public AddANewBus() {
 
         initComponents();
@@ -113,6 +115,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel3.setText("Bus Name");
 
+        busNameTextField.setBackground(new java.awt.Color(204, 204, 204));
         busNameTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         busNameTextField.setToolTipText("");
         busNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -122,10 +125,12 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel4.setText("Total Seats");
 
+        totalSeatsTextField.setBackground(new java.awt.Color(204, 204, 204));
         totalSeatsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         totalSeatsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalSeatsTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
+        targetBusStopsTextField.setBackground(new java.awt.Color(204, 204, 204));
         targetBusStopsTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         targetBusStopsTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -135,6 +140,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel10.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel10.setText("Fare per bus stop passed");
 
+        FarePerStopTextField.setBackground(new java.awt.Color(204, 204, 204));
         FarePerStopTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         FarePerStopTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         FarePerStopTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -161,8 +167,10 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jLabel7.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel7.setText("Type of Bus");
 
+        conditionComboBox.setBackground(new java.awt.Color(102, 102, 102));
         conditionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "Non - AC" }));
 
+        typeComboBox.setBackground(new java.awt.Color(102, 102, 102));
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seating", "Local" }));
 
         backButton.setBackground(new java.awt.Color(51, 57, 64));
@@ -181,41 +189,41 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(busNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(FarePerStopTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(FarePerStopTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(totalSeatsTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(totalSeatsTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(targetBusStopsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(addBusstopButton))
-                                .addComponent(jLabel7)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(targetBusStopsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(addBusstopButton)))
+                                        .addGap(21, 21, 21))
+                                    .addComponent(jLabel7)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,21 +235,22 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(targetBusStopsTextField)
-                            .addComponent(addBusstopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)))
+                            .addComponent(targetBusStopsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(addBusstopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -257,14 +266,12 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FarePerStopTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(conditionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -278,7 +285,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,6 +347,27 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_moreButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.setVisible(false);
+        JatraBegins.getHOMEPAGE().setVisible(true);
+        //  new HomePage().setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void addBusstopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusstopButtonActionPerformed
+
+        if (checkFields()) {
+            if (!targetBusStopsTextField.getText().isEmpty()) {
+                busStops.add(targetBusStopsTextField.getText());
+                busStopCounter++;
+                System.out.println("bus stop added, counter: " + busStopCounter);
+                targetBusStopsTextField.setText("");
+            } else {
+                new BusStopNeeded().setVisible(true);
+
+            }
+        }
+    }//GEN-LAST:event_addBusstopButtonActionPerformed
+
     /*
     first of all everything the user enters will be saved in local variables. When the saves changes
     button is clicked, everything stored in the variables will be saved to the database on another function call
@@ -364,7 +392,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             new database.dataBaseSQL("owner").uploadDataOwner(bus);
 
         }
-
     }//GEN-LAST:event_saveChangesButtonActionPerformed
 
     /*
@@ -382,27 +409,6 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         return true;
 
     }
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        this.setVisible(false);
-        JatraBegins.getHOMEPAGE().setVisible(true);
-        //  new HomePage().setVisible(true);
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void addBusstopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusstopButtonActionPerformed
-
-        if (checkFields()) {
-            if (!targetBusStopsTextField.getText().isEmpty()) {
-                busStops.add(targetBusStopsTextField.getText());
-                busStopCounter++;
-                System.out.println("bus stop added, counter: " + busStopCounter);
-                targetBusStopsTextField.setText("");
-            } else {
-                new BusStopNeeded().setVisible(true);
-
-            }
-        }
-
-    }//GEN-LAST:event_addBusstopButtonActionPerformed
 
     /*
     since each application has only one entry point(ie main method), the main method of this class
@@ -484,7 +490,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
 
                 //the sleep is necessary because the http pagetoken causes an invalid request if
                 //not delayed. See doc.
-                Thread.sleep(2000);
+                Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }

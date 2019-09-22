@@ -48,15 +48,15 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        myProfileDayComboBox = new javax.swing.JComboBox<String>();
-        myProfileMonthComboBox = new javax.swing.JComboBox<String>();
-        myProfileYearComboBox = new javax.swing.JComboBox<String>();
+        myProfileDayComboBox = new javax.swing.JComboBox<>();
+        myProfileMonthComboBox = new javax.swing.JComboBox<>();
+        myProfileYearComboBox = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         mySaveChangesButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         myAboutTextField = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,7 +95,6 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 59));
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +103,6 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 70, -1));
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -172,7 +170,7 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         jLabel9.setText("Year");
 
         myProfileDayComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
-        myProfileDayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        myProfileDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
         myProfileDayComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myProfileDayComboBoxActionPerformed(evt);
@@ -180,7 +178,7 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         });
 
         myProfileMonthComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
-        myProfileMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        myProfileMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         myProfileMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myProfileMonthComboBoxActionPerformed(evt);
@@ -188,7 +186,7 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         });
 
         myProfileYearComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
-        myProfileYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" }));
+        myProfileYearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" }));
 
         jButton3.setBackground(new java.awt.Color(224, 224, 224));
         jButton3.setBorder(null);
@@ -213,7 +211,7 @@ public class MyProfileOwner extends javax.swing.JFrame implements ComponentListe
         jLabel10.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel10.setText("About");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);

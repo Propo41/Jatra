@@ -55,7 +55,6 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         setTitle("Jatra - Settings");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -63,7 +62,6 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +130,7 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         jLabel3.setText("Email");
 
         settingsEmailTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsEmailTextField.setForeground(new java.awt.Color(204, 204, 204));
         settingsEmailTextField.setToolTipText("");
         settingsEmailTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         settingsEmailTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -151,6 +150,7 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         jLabel4.setText("Change Password");
 
         settingsChangePasswordTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsChangePasswordTextField.setForeground(new java.awt.Color(204, 204, 204));
         settingsChangePasswordTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         settingsChangePasswordTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         settingsChangePasswordTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +160,7 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         });
 
         settingsPhoneTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsPhoneTextField.setForeground(new java.awt.Color(204, 204, 204));
         settingsPhoneTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel6.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
@@ -169,6 +170,7 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         jLabel10.setText("Confirm Password");
 
         settingsConfirmPasswordTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsConfirmPasswordTextField.setForeground(new java.awt.Color(204, 204, 204));
         settingsConfirmPasswordTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         settingsConfirmPasswordTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         settingsConfirmPasswordTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +183,7 @@ public class OwnerSettings extends javax.swing.JFrame implements ComponentListen
         jLabel11.setText("Address");
 
         settingsAddresslTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
+        settingsAddresslTextField.setForeground(new java.awt.Color(204, 204, 204));
         settingsAddresslTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         settingsSaveChangesButton.setBackground(new java.awt.Color(51, 57, 64));
