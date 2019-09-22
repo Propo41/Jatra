@@ -5,8 +5,8 @@
  */
 package passenger;
 
-import googlemapsapi.AddressAPI;
-import googlemapsapi.NearbyBusStopsAPI;
+import googlemapsapi.Address.AddressAPI;
+import googlemapsapi.Places.NearbyBusStopsAPI;
 import java.util.ArrayList;
 
 import java.awt.event.ComponentEvent;

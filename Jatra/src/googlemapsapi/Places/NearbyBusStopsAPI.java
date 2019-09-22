@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package googlemapsapi;
+package googlemapsapi.Places;
 
+import googlemapsapi.Others.Location;
+import googlemapsapi.Others.Parser;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

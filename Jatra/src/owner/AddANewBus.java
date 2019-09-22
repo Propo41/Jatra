@@ -5,10 +5,10 @@
  */
 package owner;
 
-import googlemapsapi.BusStopSuggestion;
-import googlemapsapi.BusStops;
-import googlemapsapi.Location;
-import googlemapsapi.NearbyBusStopsAPI;
+import googlemapsapi.Places.BusStopSuggestion;
+import googlemapsapi.Places.BusStops;
+import googlemapsapi.Others.Location;
+import googlemapsapi.Places.NearbyBusStopsAPI;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;

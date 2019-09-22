@@ -19,8 +19,11 @@ import main.User;
  */
 public class dataBaseSQL {
 
+    //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
     private final String username = "root";
     private final String password = "root";
+    //</editor-fold>
+
     private String dbUrl;
     private String serviceType;
     private User user;
@@ -48,8 +51,12 @@ public class dataBaseSQL {
     }
 
     public void setDbURL() {
+
+        //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
         //this.dbUrl = "jdbc:mysql://localhost:3306/";
         this.dbUrl = "jdbc:mysql://35.240.151.216:3306/";
+        //</editor-fold>
+
     }
 
 

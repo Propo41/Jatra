@@ -1,15 +1,15 @@
 package owner;
 
-import googlemapsapi.BusStops;
-import googlemapsapi.Location;
-import googlemapsapi.NearbyBusStopsAPI;
+import googlemapsapi.Places.BusStops;
+import googlemapsapi.Others.Location;
+import googlemapsapi.Places.NearbyBusStopsAPI;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import googlemapsapi.BusStopSuggestion;
+import googlemapsapi.Places.BusStopSuggestion;
 import main.JatraBegins;
 import util.popUpWindows.MoreSettings;
 

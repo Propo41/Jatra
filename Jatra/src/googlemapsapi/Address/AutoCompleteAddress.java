@@ -1,4 +1,4 @@
-package googlemapsapi;
+package googlemapsapi.Address;
 
 import java.util.List;
 

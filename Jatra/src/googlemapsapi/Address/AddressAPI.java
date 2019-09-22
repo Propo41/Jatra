@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package googlemapsapi;
+package googlemapsapi.Address;
 
+import googlemapsapi.Others.GlobalVariables;
+import googlemapsapi.Others.Parser;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +19,11 @@ import java.util.*;
 public class AddressAPI {
 
     private String jsonString;
+
+    //<editor-fold defaultstate="collapsed" desc="API-KEY">
     private final String PLACES_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
+    //</editor-fold>
+
     private ArrayList<String> list;
 
     public AddressAPI() {

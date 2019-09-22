@@ -5,12 +5,14 @@
  */
 package passenger;
 
-import googlemapsapi.AddressAPI;
+import googlemapsapi.GeoCode.GeoCodeAPI;
+import googlemapsapi.Others.Location;
+import googlemapsapi.Places.NearbyBusStopsAPI;
+import googlemapsapi.Address.AddressAPI;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JFrame;
-import googlemapsapi.*;
 
 /**
  *

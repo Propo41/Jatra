@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package googlemapsapi;
+package googlemapsapi.GeoCode;
 
+import googlemapsapi.Others.Location;
+import googlemapsapi.Others.Parser;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +17,10 @@ import java.util.logging.Logger;
  */
 public class GeoCodeAPI {
 
+    //<editor-fold defaultstate="collapsed" desc="API-KEY">
     private final String GEOCODE_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
+    //</editor-fold>
+
     private String jsonString;
 
     public GeoCodeAPI() {
