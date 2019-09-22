@@ -349,7 +349,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.setVisible(false);
-        JatraBegins.getHOMEPAGE().setVisible(true);
+        JatraBegins.getOwner_homepage().setVisible(true);
         //  new HomePage().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 

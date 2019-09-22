@@ -32,7 +32,7 @@ public class JatraBegins {
     private static String user;
     private static passenger.Homepage passenger_homepage;
 
-    private static owner.HomePage HOMEPAGE;
+    private static owner.HomePage owner_homepage;
     private static boolean CURRENT_SESSION = false;
 
     public static void main(String[] args) {
@@ -68,12 +68,12 @@ public class JatraBegins {
         return key;
     }
 
-    public static HomePage getHOMEPAGE() {
-        return HOMEPAGE;
+    public static HomePage getOwner_homepage() {
+        return owner_homepage;
     }
 
-    public static void setHOMEPAGE(HomePage HOMEPAGE) {
-        JatraBegins.HOMEPAGE = HOMEPAGE;
+    public static void setOwner_homepage(HomePage owner_homepage) {
+        JatraBegins.owner_homepage = owner_homepage;
     }
 
     public static boolean isCURRENT_SESSION() {

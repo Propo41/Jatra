@@ -22,7 +22,7 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
 
         initComponents();
         profilePopup = new MoreSettings();
-        JatraBegins.setHOMEPAGE(this);
+        JatraBegins.setOwner_homepage(this);
         this.setLocationRelativeTo(null);
         addComponentListener(this);
         validate();

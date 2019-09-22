@@ -1,5 +1,7 @@
 package util;
 
+import main.JatraBegins;
+
 public class MyProfile extends javax.swing.JFrame {
 
     /**
@@ -25,7 +27,7 @@ public class MyProfile extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jatraLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -57,8 +59,13 @@ public class MyProfile extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(105, 214, 246));
 
-        jLabel1.setFont(new java.awt.Font("Leelawadee UI", 1, 36)); // NOI18N
-        jLabel1.setText("Jatra");
+        jatraLabel.setFont(new java.awt.Font("Leelawadee UI", 1, 36)); // NOI18N
+        jatraLabel.setText("Jatra");
+        jatraLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jatraLabelMouseClicked(evt);
+            }
+        });
 
         jSeparator1.setBackground(new java.awt.Color(51, 57, 64));
 
@@ -69,7 +76,7 @@ public class MyProfile extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jatraLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(599, Short.MAX_VALUE))
         );
@@ -79,7 +86,7 @@ public class MyProfile extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jatraLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -119,16 +126,6 @@ public class MyProfile extends javax.swing.JFrame {
         myProfileNameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myProfileNameTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         myProfileNameTextField.setName(""); // NOI18N
-        myProfileNameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                myProfileNameTextFieldMouseClicked(evt);
-            }
-        });
-        myProfileNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myProfileNameTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel4.setText("Add your image");
@@ -136,11 +133,6 @@ public class MyProfile extends javax.swing.JFrame {
         myAddImageTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 12)); // NOI18N
         myAddImageTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myAddImageTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        myAddImageTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myAddImageTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Leelawadee UI", 0, 15)); // NOI18N
         jLabel5.setText("Birthdate");
@@ -162,19 +154,9 @@ public class MyProfile extends javax.swing.JFrame {
 
         myProfileDayComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
         myProfileDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        myProfileDayComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myProfileDayComboBoxActionPerformed(evt);
-            }
-        });
 
         myProfileMonthComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
         myProfileMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        myProfileMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myProfileMonthComboBoxActionPerformed(evt);
-            }
-        });
 
         myProfileYearComboBox.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
         myProfileYearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" }));
@@ -192,6 +174,11 @@ public class MyProfile extends javax.swing.JFrame {
         mySaveChangesButton.setForeground(new java.awt.Color(255, 255, 255));
         mySaveChangesButton.setText("Save Changes");
         mySaveChangesButton.setBorder(null);
+        mySaveChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mySaveChangesButtonActionPerformed(evt);
+            }
+        });
 
         myAboutTextField.setColumns(20);
         myAboutTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 11)); // NOI18N
@@ -326,30 +313,40 @@ public class MyProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myProfileDayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileDayComboBoxActionPerformed
-
-    }//GEN-LAST:event_myProfileDayComboBoxActionPerformed
-
-    private void myProfileMonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileMonthComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myProfileMonthComboBoxActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.out.println("Proo");
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void myAddImageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddImageTextFieldActionPerformed
+    private void jatraLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jatraLabelMouseClicked
+        // TODO add your handling code here:
+        System.out.println("returning to homepage");
+        this.setVisible(false);
+        if (JatraBegins.getUser().equals("owner")) {
+            JatraBegins.getOwner_homepage().setVisible(true);
+        } else {
+            JatraBegins.getPassenger_homepage().setVisible(true);
 
-    }//GEN-LAST:event_myAddImageTextFieldActionPerformed
+        }
 
-    private void myProfileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileNameTextFieldActionPerformed
+    }//GEN-LAST:event_jatraLabelMouseClicked
 
-    }//GEN-LAST:event_myProfileNameTextFieldActionPerformed
+    private void mySaveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mySaveChangesButtonActionPerformed
+        //if fields are empty then pop alert window
+        // else upload stuff to database
+    }//GEN-LAST:event_mySaveChangesButtonActionPerformed
 
-    private void myProfileNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myProfileNameTextFieldMouseClicked
+    /*
+    incase the noobshit mustofa deletes the above code when editing the gui, here is a backup
+      // TODO add your handling code here:
+        System.out.println("returning to homepage");
+        this.setVisible(false);
+        if (JatraBegins.getUser().equals("owner")) {
+            JatraBegins.getOwner_homepage().setVisible(true);
+        } else {
+            JatraBegins.getPassenger_homepage().setVisible(true);
 
-    }//GEN-LAST:event_myProfileNameTextFieldMouseClicked
-
+        }
+     */
     /**
      * @param args the command line arguments
      */
@@ -387,7 +384,6 @@ public class MyProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -406,6 +402,7 @@ public class MyProfile extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel jatraLabel;
     private javax.swing.JTextArea myAboutTextField;
     private javax.swing.JTextField myAddImageTextField;
     private javax.swing.JTextField myGenderTextField;

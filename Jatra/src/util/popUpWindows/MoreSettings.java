@@ -180,7 +180,7 @@ public class MoreSettings extends javax.swing.JFrame {
 
         //System.out.println("printing object: " + JatraBegins.getPassenger_homepage());
         if (userType.equals("owner")) {
-            JatraBegins.getHOMEPAGE().setVisible(false);
+            JatraBegins.getOwner_homepage().setVisible(false);
             // homepage_owner.setVisible(false);
         } else {
             //homepage_passenger.setVisible(false);

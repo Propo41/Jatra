@@ -117,7 +117,7 @@ public class SigningOut extends javax.swing.JFrame {
 
         if (JatraBegins.getUser().equals("owner")) {
 
-            JatraBegins.getHOMEPAGE().setVisible(false);
+            JatraBegins.getOwner_homepage().setVisible(false);
         } else {
             JatraBegins.getPassenger_homepage().setVisible(false);
         }
