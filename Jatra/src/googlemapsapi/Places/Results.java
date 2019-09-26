@@ -9,6 +9,9 @@ package googlemapsapi.Places;
  *
  * @author Swapnil
  */
+/*
+contains details for the busStops
+ */
 public class Results {
 
     private String icon;

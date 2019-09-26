@@ -73,6 +73,7 @@ public class NearbyBusStopsAPI {
     for later use.
      */
     private BusStops searchForCurrentLocation() {
+
         String urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
                 + "location=" + currCoordinates.getLat()
                 + ","
@@ -88,11 +89,15 @@ public class NearbyBusStopsAPI {
             //  //System.out.println("token: " + next_page_token);
         }
 
-        System.out.println(urlString);
+        // System.out.println(urlString);
         try {
             jsonString = Parser.convertURLtoString(urlString);
             //   System.out.println(jsonString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
+
+            System.out.println("STOPS NEAR USER's current location");
+
+            debugPrint(busStop);
 
             //if it's a passenger session, then save the busStop name in a global variable inside JatraBegins
             if (JatraBegins.getUser().equals("passenger")) {
@@ -134,12 +139,25 @@ public class NearbyBusStopsAPI {
         try {
             jsonString = Parser.convertURLtoString(urlString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
+            System.out.println("STOPS NEAR USER's dest location");
+
+            debugPrint(busStop);
             JatraBegins.setDestBusStops(busStop);
             // Parser.outputToFile(busStop, "destination");
 
         } catch (IOException ex) {
             Logger.getLogger(NearbyBusStopsAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void debugPrint(BusStops stops) {
+        System.out.println();
+        for (int i = 0; i < stops.results.size(); i++) {
+            System.out.println(stops.results.get(i).getName());
+        }
+        System.out.println("----------------------------------------------");
+        System.out.println();
+
     }
 
 }

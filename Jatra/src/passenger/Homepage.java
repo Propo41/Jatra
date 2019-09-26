@@ -307,7 +307,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
 
         new NearbyBusStopsAPI(1500).searchBusStopsNearby(null);
-        System.out.println("busStops searched nearby and put into file");
+        // System.out.println("busStops searched nearby and put into file");
 
         new AvailableBusses().setVisible(true);
         this.setVisible(false);

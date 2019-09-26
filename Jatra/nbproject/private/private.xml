@@ -5,15 +5,18 @@
         <group>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/database/dataBaseSQL.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/GeoCode/GeoCodeAPI.java</file>
-            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/PlacesOfInterest.java</file>
+            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Places/BusStops.java</file>
+            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Places/NearbyBusStopsAPI.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/GeoCode/GeoCode.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/popUpWindows/SigningOut.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/Login.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/Cells/BusDetails6.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/Cells/BusDetails3.java</file>
+            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Places/BusStopSuggestion.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/main/JatraBegins.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/main/Bus.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Address/AutoCompleteAddress.java</file>
+            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Places/Results.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/AvailableBusses.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/popUpWindows/WrongCredentials.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/Cells/BusDetails4.java</file>
@@ -27,9 +30,7 @@
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Others/Parser.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/owner/MyProfileOwner.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/owner/ShowBusStops.java</file>
-            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/popUpWindows/MoreSettings.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/MyProfile.java</file>
-            <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/googlemapsapi/Others/Results.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/popUpWindows/AccountCreated.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/util/popUpWindows/EmptyFields.java</file>
             <file>file:/C:/Users/Swapnil/Documents/NetBeansProjects/Jatra/SD_Lab_Project_2/Jatra/src/passenger/Homepage.java</file>

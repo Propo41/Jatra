@@ -12,13 +12,21 @@ import java.util.logging.Logger;
 import main.Bus;
 import main.JatraBegins;
 import main.User;
+import googlemapsapi.Places.BusStops;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Swapnil
+ * @
+ *
  */
 public class dataBaseSQL {
 
+    //TODO in the target_stops table, add more columns: place_id, icon, vicinity
+    // add the vicinity and stuff from the method searchBusStops() down below
     //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
     private final String username = "root";
     private final String password = "microlab123";
@@ -28,7 +36,6 @@ public class dataBaseSQL {
     private String serviceType;
     private User user;
     private static int index = 0;
-    private int busID;
 
     public dataBaseSQL(User user) {
 
@@ -104,13 +111,14 @@ public class dataBaseSQL {
      */
     public void uploadDataOwner(Bus bus) {
         System.out.println("uploading data to databse");
-        findTotalEntriesOfBusses();
-        uploadDataForBus(bus);
-        uploadDataForBusStops(bus.getBusStops());
+
+        int busID = findTotalEntriesOfBusses();
+        uploadDataForBus(bus, busID);
+        uploadDataForBusStops(bus.getBusStops(), busID);
 
     }
 
-    private void uploadDataForBus(Bus bus) {
+    private void uploadDataForBus(Bus bus, int busID) {
 
         try {
             //System.out.println("db: " + dbUrl);
@@ -142,7 +150,7 @@ public class dataBaseSQL {
 
     }
 
-    private void uploadDataForBusStops(List<String> stopList) {
+    private void uploadDataForBusStops(List<String> stopList, int busID) {
 
         try {
 
@@ -172,7 +180,7 @@ public class dataBaseSQL {
     implicitly called from uploadDataOwner
 
      */
-    private void findTotalEntriesOfBusses() {
+    private int findTotalEntriesOfBusses() {
 
         try {
 
@@ -182,7 +190,7 @@ public class dataBaseSQL {
             ResultSet result = statement.executeQuery(sql);
             //the cursor points to -1. so this next() neeeds to be called
             result.next();
-
+            int busID;
             String str;
             if ((str = result.getString("max")) != null) {
                 busID = Integer.parseInt(str);
@@ -191,11 +199,13 @@ public class dataBaseSQL {
             } else {
                 busID = 1;
             }
+            return busID;
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
+        return -1;
 
     }
 
@@ -293,10 +303,8 @@ public class dataBaseSQL {
                 if (result.getString("email").equals(email) && result.getString("password").equals(password)) {
                     key = result.getInt("indexID");
                     //assigning current session key
-
                     JatraBegins.setKey(key);
                     return true;
-                    //System.out.println("key: " + key);
                 }
             }
 
@@ -313,7 +321,99 @@ public class dataBaseSQL {
     stores the result in a map <busstop, busid> object
      */
     public void searchBusStops() {
+        BusStops currLoc = JatraBegins.getCurrBusStops();
+        BusStops destLoc = JatraBegins.getDestBusStops();
+        int currLocIndex = 0;
+        int destLocIndex = 0;
 
+        try {
+            Connection myConn = DriverManager.getConnection(dbUrl + "owner" + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+
+            int busID = 1;
+            ResultSet result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+            //ResultSet iterator = result;
+            int length = getLength(result);
+            // System.out.println("LENGTH OF TARGET STOPS: " + length);
+            System.out.println("LENGTH OF CURR STOPS: " + currLoc.results.size());
+
+            //default value false
+            boolean[] visited = new boolean[length];
+
+            boolean a = false, b = false;
+
+            result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+
+            for (int i = 0; i < currLoc.results.size(); i++) {
+                int j = 0;
+
+                while (result.next()) {
+                    if (result.getString("stopName").equals(currLoc.results.get(i).getName())) {
+                        visited[j] = true;
+                        a = true;
+                        currLocIndex = i;
+                        break;
+                    }
+
+                    j++;
+                }
+
+                if (a == true) {
+                    break;
+                } else {
+                    result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+
+                }
+            }
+
+            if (a == true) {
+                for (int i = 0; i < destLoc.results.size(); i++) {
+                    int j = 0;
+
+                    while (result.next()) {
+                        if (visited[j] == false && result.getString("stopName").equals(destLoc.results.get(i).getName())) {
+                            visited[j] = true;
+                            b = true;
+                            destLocIndex = i;
+                            break;
+                        }
+                        j++;
+                    }
+
+                    if (b == true) {
+                        break;
+                    } else {
+                        result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+
+                    }
+
+                }
+            }
+
+            if ((a && b) == true) {
+                System.out.println("FOUND!!! YESSSSSS");
+
+                //now send this two Result objects to the class AvailableBusses file where the cells will be displayed
+                System.out.println("From: " + currLoc.results.get(currLocIndex).getName());
+                System.out.println("To: " + destLoc.results.get(destLocIndex).getName());
+
+            } else {
+                System.out.println("not found! NOOOOOOOOOOOOOOOOOOO");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    private int getLength(ResultSet rs) throws SQLException {
+        int c = 0;
+        while (rs.next()) {
+            c++;
+        }
+        return c;
     }
 
 }

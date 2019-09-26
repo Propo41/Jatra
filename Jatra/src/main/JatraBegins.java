@@ -36,6 +36,7 @@ public class JatraBegins {
     private static owner.HomePage owner_homepage;
     private static boolean CURRENT_SESSION = false;
 
+    //stores the busStop object when passenger presses the submit button after selecting the current and dest locations
     private static BusStops currBusStops;
     private static BusStops destBusStops;
 

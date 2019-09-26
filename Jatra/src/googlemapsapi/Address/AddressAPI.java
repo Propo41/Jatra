@@ -78,8 +78,7 @@ public class AddressAPI {
 
         }
 
-        System.out.println("length in homepage: " + list.size());
-
+        // System.out.println("length in homepage: " + list.size());
         // System.out.println("i: " + i);
     }
 
@@ -95,7 +94,7 @@ public class AddressAPI {
 
             if (obj.predictions.get(i).getStructured_formatting().getMain_text().equals(address)) {
 
-                System.out.println("PLACE_ID: " + obj.predictions.get(i).getPlace_id() + "  name: " + obj.predictions.get(i).getStructured_formatting().getMain_text());
+                //System.out.println("PLACE_ID: " + obj.predictions.get(i).getPlace_id() + "  name: " + obj.predictions.get(i).getStructured_formatting().getMain_text());
                 return obj.predictions.get(i).getPlace_id();
 
             }

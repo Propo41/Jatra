@@ -79,10 +79,10 @@ public class Parser {
                 BufferedWriter writer = new BufferedWriter(new FileWriter("tempFiles/currentLocation_stops.txt"));
                 int length = busStops.results.size();
 
-                System.out.println("length: " + length);
+                // System.out.println("length: " + length);
                 for (int i = 0; i < length; i++) {
                     writer.write(busStops.results.get(i).getName());
-                    System.out.println("busStop: " + busStops.results.get(i).getName() + "  place_id: " + busStops.results.get(i).getPlace_id());
+                    // System.out.println("busStop: " + busStops.results.get(i).getName() + "  place_id: " + busStops.results.get(i).getPlace_id());
                     writer.newLine();
                 }
 
@@ -105,8 +105,7 @@ public class Parser {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("file writing successful");
-
+        // System.out.println("file writing successful");
     }
 
     public static List<String> readFromFile(String type) {
