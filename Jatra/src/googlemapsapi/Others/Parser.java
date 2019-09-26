@@ -79,9 +79,10 @@ public class Parser {
                 BufferedWriter writer = new BufferedWriter(new FileWriter("tempFiles/currentLocation_stops.txt"));
                 int length = busStops.results.size();
 
+                System.out.println("length: " + length);
                 for (int i = 0; i < length; i++) {
                     writer.write(busStops.results.get(i).getName());
-                    System.out.println("busStop: " + busStops.results.get(i).getName());
+                    System.out.println("busStop: " + busStops.results.get(i).getName() + "  place_id: " + busStops.results.get(i).getPlace_id());
                     writer.newLine();
                 }
 

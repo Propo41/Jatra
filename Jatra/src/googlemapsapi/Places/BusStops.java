@@ -1,6 +1,5 @@
 package googlemapsapi.Places;
 
-import googlemapsapi.Others.Results;
 import java.util.List;
 
 public class BusStops {

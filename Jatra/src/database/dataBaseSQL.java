@@ -21,7 +21,7 @@ public class dataBaseSQL {
 
     //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
     private final String username = "root";
-    private final String password = "root";
+    private final String password = "microlab123";
     //</editor-fold>
 
     private String dbUrl;
@@ -53,8 +53,8 @@ public class dataBaseSQL {
     public void setDbURL() {
 
         //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
-        //this.dbUrl = "jdbc:mysql://localhost:3306/";
-        this.dbUrl = "jdbc:mysql://35.240.151.216:3306/";
+        this.dbUrl = "jdbc:mysql://localhost:3306/";
+        //  this.dbUrl = "jdbc:mysql://35.240.151.216:3306/";
         //</editor-fold>
 
     }

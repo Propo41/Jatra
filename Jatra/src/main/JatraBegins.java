@@ -1,5 +1,6 @@
 package main;
 
+import googlemapsapi.Places.BusStops;
 import owner.HomePage;
 import util.Login;
 import passenger.Homepage;
@@ -34,6 +35,25 @@ public class JatraBegins {
 
     private static owner.HomePage owner_homepage;
     private static boolean CURRENT_SESSION = false;
+
+    private static BusStops currBusStops;
+    private static BusStops destBusStops;
+
+    public static BusStops getCurrBusStops() {
+        return currBusStops;
+    }
+
+    public static void setCurrBusStops(BusStops currBusStops) {
+        JatraBegins.currBusStops = currBusStops;
+    }
+
+    public static BusStops getDestBusStops() {
+        return destBusStops;
+    }
+
+    public static void setDestBusStops(BusStops destBusStops) {
+        JatraBegins.destBusStops = destBusStops;
+    }
 
     public static void main(String[] args) {
         //entry point of program

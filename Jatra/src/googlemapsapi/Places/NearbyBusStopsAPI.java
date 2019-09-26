@@ -52,7 +52,7 @@ public class NearbyBusStopsAPI {
 
         // System.out.println("curr: " + currCoordinates.getLat());
         //this line is just made for debugging. It shouldn't be here.
-        JatraBegins.setUser("owner");
+        //JatraBegins.setUser("owner");
         if (JatraBegins.getUser().equals("passenger")) {
             searchForCurrentLocation();
             searchForDestLocation();
@@ -93,9 +93,16 @@ public class NearbyBusStopsAPI {
             jsonString = Parser.convertURLtoString(urlString);
             //   System.out.println(jsonString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
-            // Parser.outputToFile(busStop, "current");
-            //   System.out.println("token: " + busStop.next_page_token);
 
+            //if it's a passenger session, then save the busStop name in a global variable inside JatraBegins
+            if (JatraBegins.getUser().equals("passenger")) {
+                // Parser.outputToFile(busStop, "current");
+
+                JatraBegins.setCurrBusStops(busStop);
+
+            }
+
+            //   System.out.println("token: " + busStop.next_page_token);
             return busStop;
 
             //  System.out.println("success: " + busStop.results.get(0).getName());
@@ -127,7 +134,8 @@ public class NearbyBusStopsAPI {
         try {
             jsonString = Parser.convertURLtoString(urlString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
-            Parser.outputToFile(busStop, "destination");
+            JatraBegins.setDestBusStops(busStop);
+            // Parser.outputToFile(busStop, "destination");
 
         } catch (IOException ex) {
             Logger.getLogger(NearbyBusStopsAPI.class.getName()).log(Level.SEVERE, null, ex);
