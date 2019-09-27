@@ -85,6 +85,11 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         existingBusButton.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         existingBusButton.setText("My Existing Busses");
         existingBusButton.setBorder(null);
+        existingBusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                existingBusButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(51, 51, 51));
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
@@ -219,6 +224,10 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         new ShowBusStops().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_showBusStopsButtonActionPerformed
+
+    private void existingBusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingBusButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_existingBusButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -13,9 +13,11 @@ import main.Bus;
 import main.JatraBegins;
 import main.User;
 import googlemapsapi.Places.BusStops;
+import googlemapsapi.Places.Results;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import passenger.AvailableBusList;
 
 /**
  *
@@ -184,7 +186,7 @@ public class dataBaseSQL {
 
         try {
 
-            Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Connection myConn = DriverManager.getConnection(dbUrl + "owner" + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
             String sql = "select max(busID) as 'max' from bus_list;";
             ResultSet result = statement.executeQuery(sql);
@@ -209,7 +211,6 @@ public class dataBaseSQL {
 
     }
 
-
     /*
     finds the number of rows in the user table.
      */
@@ -218,6 +219,7 @@ public class dataBaseSQL {
         Connection myConn;
         int count = -1;
         try {
+
             myConn = DriverManager.getConnection(dbUrl + serviceType + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
             ResultSet rs = statement.executeQuery("select count(*) from user");
@@ -319,88 +321,107 @@ public class dataBaseSQL {
     /*
     iterates thru the databse and finds all the busStops that each bus travels through
     stores the result in a map <busstop, busid> object
+    TODO only for busID=1 done. Do the same for when busID is varying
      */
     public void searchBusStops() {
         BusStops currLoc = JatraBegins.getCurrBusStops();
         BusStops destLoc = JatraBegins.getDestBusStops();
         int currLocIndex = 0;
         int destLocIndex = 0;
+        List<AvailableBusList> listOfTargets = new ArrayList<>();
 
         try {
             Connection myConn = DriverManager.getConnection(dbUrl + "owner" + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
 
-            int busID = 1;
-            ResultSet result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
-            //ResultSet iterator = result;
-            int length = getLength(result);
-            // System.out.println("LENGTH OF TARGET STOPS: " + length);
-            System.out.println("LENGTH OF CURR STOPS: " + currLoc.results.size());
+            int totalBusses = findTotalEntriesOfBusses();
+            System.out.println("total busses: " + totalBusses);
 
-            //default value false
-            boolean[] visited = new boolean[length];
+            //iterates through all the busID's present in the database
+            //and checks their respective busStops. the busStops are then matched against the user's present address and dest address.
+            // the matches found will be added to the list of AvailableBusList (listOfTargets).
+            for (int busID = 1; busID <= totalBusses; busID++) {
 
-            boolean a = false, b = false;
+                ResultSet result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+                int length = getLength(result);
+                // System.out.println("LENGTH OF TARGET STOPS: " + length);
+                System.out.println("LENGTH OF CURR STOPS: " + currLoc.results.size());
 
-            result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+                boolean[] visited = new boolean[length];
+                boolean a = false, b = false;
 
-            for (int i = 0; i < currLoc.results.size(); i++) {
-                int j = 0;
+                result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
 
-                while (result.next()) {
-                    if (result.getString("stopName").equals(currLoc.results.get(i).getName())) {
-                        visited[j] = true;
-                        a = true;
-                        currLocIndex = i;
-                        break;
-                    }
-
-                    j++;
-                }
-
-                if (a == true) {
-                    break;
-                } else {
-                    result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
-
-                }
-            }
-
-            if (a == true) {
-                for (int i = 0; i < destLoc.results.size(); i++) {
+                //<editor-fold defaultstate="collapsed" desc="Iterates through the current location busStops and matches against the stops in the database">
+                for (int i = 0; i < currLoc.results.size(); i++) {
                     int j = 0;
 
                     while (result.next()) {
-                        if (visited[j] == false && result.getString("stopName").equals(destLoc.results.get(i).getName())) {
+                        if (result.getString("stopName").equals(currLoc.results.get(i).getName())) {
                             visited[j] = true;
-                            b = true;
-                            destLocIndex = i;
+                            a = true;
+                            currLocIndex = i;
                             break;
                         }
+
                         j++;
                     }
 
-                    if (b == true) {
+                    if (a == true) {
                         break;
                     } else {
                         result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
 
                     }
-
                 }
+
+                //</editor-fold>
+                //<editor-fold defaultstate="collapsed" desc="Iterates through the destination location busStops and matches against the stops in the database">
+                if (a == true) {
+                    for (int i = 0; i < destLoc.results.size(); i++) {
+                        int j = 0;
+
+                        while (result.next()) {
+                            if (visited[j] == false && result.getString("stopName").equals(destLoc.results.get(i).getName())) {
+                                visited[j] = true;
+                                b = true;
+                                //BUS STOP DETAILS CAN BE ACCESSED USING THIS INDEX
+                                destLocIndex = i;
+
+                                break;
+                            }
+                            j++;
+                        }
+
+                        if (b == true) {
+                            break;
+                        } else {
+                            result = statement.executeQuery("SELECT * FROM target_stops where busID=" + busID);
+
+                        }
+
+                    }
+                }
+
+                //</editor-fold>
+                if ((a && b) == true) {
+                    System.out.println("FOUND!!! YESSSSSS");
+
+                    //now send this two Result objects to the class AvailableBusses file where the cells will be displayed
+                    System.out.println("From: " + currLoc.results.get(currLocIndex).getName());
+                    System.out.println("To: " + destLoc.results.get(destLocIndex).getName());
+                    //saving the bus stop and bus id info into an object of class AvailableBusList
+                    // now pass this object to whereever necessary
+
+                    listOfTargets.add(new AvailableBusList(currLoc.results.get(currLocIndex), destLoc.results.get(destLocIndex), busID));
+
+                } else {
+                    System.out.println("not found! NOOOOOOOOOOOOOOOOOOO");
+                }
+
             }
 
-            if ((a && b) == true) {
-                System.out.println("FOUND!!! YESSSSSS");
-
-                //now send this two Result objects to the class AvailableBusses file where the cells will be displayed
-                System.out.println("From: " + currLoc.results.get(currLocIndex).getName());
-                System.out.println("To: " + destLoc.results.get(destLocIndex).getName());
-
-            } else {
-                System.out.println("not found! NOOOOOOOOOOOOOOOOOOO");
-            }
-
+            //TODO now the list object listOfTargets is the one used to generate the cells list. Pass this object to wherever necessary
         } catch (Exception e) {
             e.printStackTrace();
 

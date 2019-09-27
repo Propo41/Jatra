@@ -21,7 +21,7 @@ public class AddressAPI {
     private String jsonString;
 
     //<editor-fold defaultstate="collapsed" desc="API-KEY">
-    private final String PLACES_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
+    private final String PLACES_API_KEY = "AIzaSyDfAKN5tfaNv6CfPgwkcoSW9vmmgwYdM1A";
     //</editor-fold>
 
     private ArrayList<String> list;
@@ -78,8 +78,6 @@ public class AddressAPI {
 
         }
 
-        // System.out.println("length in homepage: " + list.size());
-        // System.out.println("i: " + i);
     }
 
     /*

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class GeoCodeAPI {
 
     //<editor-fold defaultstate="collapsed" desc="API-KEY">
-    private final String GEOCODE_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
+    private final String GEOCODE_API_KEY = "AIzaSyDfAKN5tfaNv6CfPgwkcoSW9vmmgwYdM1A";
     //</editor-fold>
 
     private String jsonString;

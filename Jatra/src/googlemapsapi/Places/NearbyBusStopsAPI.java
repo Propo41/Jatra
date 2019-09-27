@@ -21,7 +21,7 @@ public class NearbyBusStopsAPI {
     private String jsonString;
     private static Location currCoordinates;
     private static Location destCoordinates;
-    private final String PLACES_API_KEY = "AIzaSyAUbjkrtG9C7Zvjmk3SKd6gqXtdznTL5aY";
+    private final String PLACES_API_KEY = "AIzaSyDfAKN5tfaNv6CfPgwkcoSW9vmmgwYdM1A";
     // 50 000 meters is the maximum allowed
     private int radius;
     private String next_page_token;
