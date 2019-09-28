@@ -5,8 +5,12 @@
  */
 package passenger;
 
+import googlemapsapi.Maps.ShowBusStops;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.popUpWindows.MoreSettings;
 
 public class BusDetails extends javax.swing.JFrame implements ComponentListener {
@@ -32,6 +36,7 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
         jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        trackStopsa = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -40,7 +45,6 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\DetailsLogo.png")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -48,7 +52,6 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, 20));
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Desktop\\Jatra\\Images\\Owner\\PopUpLogo.png")); // NOI18N
         jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,15 +64,28 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
 
         jPanel4.setBackground(new java.awt.Color(224, 224, 224));
 
+        trackStopsa.setText("Track BusStops");
+        trackStopsa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackStopsaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(416, Short.MAX_VALUE)
+                .addComponent(trackStopsa)
+                .addGap(177, 177, 177))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(trackStopsa, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -145,6 +161,17 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
         profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void trackStopsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStopsaActionPerformed
+
+        // a dummy bus ID. The actual one would come from the cells window, when user clicks on the ith cell, then busID = i;
+        int busID = 6;
+        try {
+            new ShowBusStops("passenger", busID);
+        } catch (IOException ex) {
+            Logger.getLogger(BusDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_trackStopsaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,6 +216,7 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton trackStopsa;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -13,10 +13,8 @@ import main.Bus;
 import main.JatraBegins;
 import main.User;
 import googlemapsapi.Places.BusStops;
-import googlemapsapi.Places.Results;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 import passenger.AvailableBusList;
 
 /**
@@ -27,8 +25,6 @@ import passenger.AvailableBusList;
  */
 public class dataBaseSQL {
 
-    //TODO in the target_stops table, add more columns: place_id, icon, vicinity
-    // add the vicinity and stuff from the method searchBusStops() down below
     //<editor-fold defaultstate="collapsed" desc="CREDENTIALS">
     private final String username = "root";
     private final String password = "microlab123";
@@ -111,12 +107,12 @@ public class dataBaseSQL {
     uploads data to the databse and finds the total entries of bus
 
      */
-    public void uploadDataOwner(Bus bus) {
+    public void uploadDataOwner(Bus bus, List<googlemapsapi.Others.Location> location) {
         System.out.println("uploading data to databse");
 
         int busID = findTotalEntriesOfBusses();
         uploadDataForBus(bus, busID);
-        uploadDataForBusStops(bus.getBusStops(), busID);
+        uploadDataForBusStops(bus.getBusStops(), busID, location);
 
     }
 
@@ -152,18 +148,22 @@ public class dataBaseSQL {
 
     }
 
-    private void uploadDataForBusStops(List<String> stopList, int busID) {
+    private void uploadDataForBusStops(List<String> stopList, int busID, List<googlemapsapi.Others.Location> location) {
 
         try {
 
             Connection myConn = DriverManager.getConnection(dbUrl + JatraBegins.getUser() + "?autoReconnect=true&useSSL=false", this.username, this.password);
             Statement statement = myConn.createStatement();
 
+            System.out.println("stoplist size: " + stopList.size() + "  location size: " + location.size());
             for (int i = 0; i < stopList.size(); i++) {
 
                 String sql = "insert into target_stops VALUES ('"
                         + stopList.get(i) + "', '"
-                        + busID + "')";
+                        + busID + "', '"
+                        + location.get(i).getLat() + "', '"
+                        + location.get(i).getLng() + "', '"
+                        + location.get(i).getPlace_id() + "')";
 
                 statement.executeUpdate(sql);
             }
@@ -413,6 +413,9 @@ public class dataBaseSQL {
                     //saving the bus stop and bus id info into an object of class AvailableBusList
                     // now pass this object to whereever necessary
 
+                    // param: current bus stop
+                    //        dest bus stop
+                    //        bus id
                     listOfTargets.add(new AvailableBusList(currLoc.results.get(currLocIndex), destLoc.results.get(destLocIndex), busID));
 
                 } else {
@@ -422,6 +425,8 @@ public class dataBaseSQL {
             }
 
             //TODO now the list object listOfTargets is the one used to generate the cells list. Pass this object to wherever necessary
+            JatraBegins.setListOfTargets(listOfTargets);
+
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -435,6 +440,31 @@ public class dataBaseSQL {
             c++;
         }
         return c;
+    }
+
+    public List<googlemapsapi.Others.Location> getLocationOfBusStops(int busID) {
+
+        List<googlemapsapi.Others.Location> location = new ArrayList<>();
+
+        try {
+            Connection myConn = DriverManager.getConnection(dbUrl + "owner" + "?autoReconnect=true&useSSL=false", this.username, this.password);
+            Statement statement = myConn.createStatement();
+            ResultSet result = statement.executeQuery("select stopName, lat, lng, busID from target_stops");
+
+            while (result.next()) {
+                if (result.getString("busID").equals(busID + "")) {
+                    location.add(new googlemapsapi.Others.Location(result.getString("stopName"), Double.parseDouble(result.getString("lat")),
+                            Double.parseDouble(result.getString("lng"))));
+                }
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return location;
+
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package owner;
 
+import database.dataBaseSQL;
 import googlemapsapi.Places.BusStopSuggestion;
 import googlemapsapi.Places.BusStops;
 import googlemapsapi.Others.Location;
@@ -25,7 +26,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import main.Bus;
 import main.JatraBegins;
-import main.User;
 import util.AutoCompleteBehaviour;
 import util.popUpWindows.BusStopNeeded;
 import util.popUpWindows.EmptyFields;
@@ -41,15 +41,24 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private Bus bus;
     private List<String> busStops;
     private int busStopCounter;
-    public static List<String> listStops;
+    private static List<String> listStops;
+    private static List<BusStops> listAllStops; // contains all the busStops in dhaka generated;
+
+    //contains the googlemapsapi.Other.Location object's array.
+    //It's used to store the lat,lng and placeid of the busstops after user clicks on submit
+    private List<Location> stopLocation;
 
     private int delay = 1500;
 
     public AddANewBus() {
 
+        busStops = new ArrayList<>();
+        stopLocation = new ArrayList<>();
+        listAllStops = new ArrayList<>();
+        listStops = new ArrayList<>();
         initComponents();
         entryPoint();
-        busStops = new ArrayList<>();
+
         busStopCounter = 0;
         this.setLocationRelativeTo(null);
         profilePopup = new MoreSettings();
@@ -350,14 +359,33 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.setVisible(false);
         JatraBegins.getOwner_homepage().setVisible(true);
-        //  new HomePage().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addBusstopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBusstopButtonActionPerformed
 
         if (checkFields()) {
             if (!targetBusStopsTextField.getText().isEmpty()) {
-                busStops.add(targetBusStopsTextField.getText());
+                String str = targetBusStopsTextField.getText();
+                busStops.add(str);
+
+                System.out.println("listAllStops: " + listAllStops.size());
+
+                //check at which index location the str is situated inside the list<BusStops> listAllBusstops;
+                for (int i = 0; i < listAllStops.size(); i++) {
+                    for (int j = 0; j < listAllStops.get(i).results.size(); j++) {
+
+                        // System.out.println("listAllstops.results size: " + listAllStops.get(i).results.size());
+                        if (str.equals(listAllStops.get(i).results.get(j).getName())) {
+                            //an error might come if the user enters a location that was not suggested from the autocompletion box. TODO handle it
+                            stopLocation.add(new Location(listAllStops.get(i).results.get(j).getGeometry().getLocation().getLat(),
+                                    listAllStops.get(i).results.get(j).getGeometry().getLocation().getLng(), listAllStops.get(i).results.get(j).getPlace_id()));
+
+                        }
+                    }
+                }
+
+                System.out.println("size of stopLOCATION: " + stopLocation.size());
+
                 busStopCounter++;
                 System.out.println("bus stop added, counter: " + busStopCounter);
                 targetBusStopsTextField.setText("");
@@ -389,7 +417,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             bus = new Bus(busName, seats, currentDate, 0, fare, type, condition, busStops);
             // now save the bus contents to database based on the key of current user
 
-            new database.dataBaseSQL("owner").uploadDataOwner(bus);
+            new dataBaseSQL("owner").uploadDataOwner(bus, stopLocation);
 
         }
     }//GEN-LAST:event_saveChangesButtonActionPerformed
@@ -418,33 +446,19 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
      */
     public void entryPoint() {
 
+        System.out.println("current session: " + JatraBegins.isCURRENT_SESSION());
+
         if (!JatraBegins.isCURRENT_SESSION()) {
             findAllBusstops();
-        } else {
             JatraBegins.setCURRENT_SESSION(true);
+        } else {
+
+            listAllStops = JatraBegins.getListAllStops();
+            listStops = JatraBegins.getListStops();
+            //  listStops = Arrays.asList("hello", "asd");
+
         }
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddANewBus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -472,14 +486,19 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
         BusStops busStops;
         String next_token = null;
 
-        listStops = new ArrayList<>();
         while (true) {
             try {
-                busStops = new NearbyBusStopsAPI(45000).searchBusStopsNearby(next_token);
+
+                busStops = new NearbyBusStopsAPI(15000).searchBusStopsNearby(next_token);
+                listAllStops.add(busStops);
                 int l = busStops.results.size();
+
                 next_token = busStops.next_page_token;
                 System.out.println("l = " + l);
 
+                //for each session token, there are 20 max result.
+                //iterating through them and saving them in a string listStops for
+                //the autocomplete feature
                 for (int i = 0; i < l; i++) {
                     listStops.add(busStops.results.get(i).getName());
                 }
@@ -491,9 +510,13 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                 //the sleep is necessary because the http pagetoken causes an invalid request if
                 //not delayed. See doc.
                 Thread.sleep(delay);
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            JatraBegins.setListAllStops(listAllStops);
+            JatraBegins.setListStops(listStops);
 
         }
 
@@ -548,6 +571,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
      */
     public static void autocomplete() {
 
+        // System.out.println("object debug: " + listStops);
         //converting the List of String- listStops to an object of BusStopSuggesstion for the autocompletion stuff to work
         List<BusStopSuggestion> choices = new ArrayList<>();
         for (int i = 0; i < listStops.size(); i++) {
@@ -576,8 +600,8 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
             }
 
             @Override
-            public String getStringToInsert(BusStopSuggestion person) {
-                return person.stopName;
+            public String getStringToInsert(BusStopSuggestion sugg) {
+                return sugg.stopName;
             }
         });
 
@@ -586,6 +610,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
                 final Component result = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 final BusStopSuggestion p = (BusStopSuggestion) value;
                 setText(p.stopName);
+
                 return result;
             }
         };

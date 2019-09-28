@@ -16,6 +16,15 @@ import main.JatraBegins;
  *
  * @author Swapnil
  */
+/*
+https://developers.google.com/places/web-service/faq
+By default, the Places API sorts results by prominence within the supplied radius.
+A Nearby Search request can return up to 60 results, split across three pages.
+If a place ranks 22nd in prominence, it will appear on the second page of results which you can access through paging.
+If a place ranks greater than 60th in prominence it will not be included in the search result, even if it is closer to the center of your search.
+You can sort your results by distance instead of prominence by setting the rankby parameter in your query to
+distance and omitting the radius parameter. Relevance will be ignored and places will be returned in order of distance from location.
+ */
 public class NearbyBusStopsAPI {
 
     private String jsonString;
@@ -74,19 +83,34 @@ public class NearbyBusStopsAPI {
      */
     private BusStops searchForCurrentLocation() {
 
-        String urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-                + "location=" + currCoordinates.getLat()
-                + ","
-                + currCoordinates.getLng()
-                + "&radius=" + radius
-                + "&"
-                + "type=busstop&"
-                + "keyword=bus&"
-                + "key=" + PLACES_API_KEY;
+        String urlString;
+
+        if (JatraBegins.getUser().equals("passenger")) {
+
+            urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+                    + "location=" + currCoordinates.getLat()
+                    + ","
+                    + currCoordinates.getLng()
+                    + "&radius=" + radius
+                    + "&"
+                    + "type=busstop&"
+                    + "keyword=bus&"
+                    + "key=" + PLACES_API_KEY;
+        } else {
+            urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+                    + "location=" + currCoordinates.getLat()
+                    + ","
+                    + currCoordinates.getLng()
+                    + "&rankby=distance"
+                    + "&"
+                    + "type=bus_station&"
+                    + "keyword=bus&"
+                    + "key=" + PLACES_API_KEY;
+
+        }
 
         if (next_page_token != null) {
             urlString = urlString.concat("&pagetoken=" + next_page_token);
-            //  //System.out.println("token: " + next_page_token);
         }
 
         // System.out.println(urlString);
@@ -94,8 +118,11 @@ public class NearbyBusStopsAPI {
             jsonString = Parser.convertURLtoString(urlString);
             //   System.out.println(jsonString);
             BusStops busStop = Parser.deSerialize_BusStops(jsonString);
-
-            System.out.println("STOPS NEAR USER's current location");
+            if (JatraBegins.getUser().equals("passenger")) {
+                System.out.println("STOPS NEAR USER's current location");
+            } else {
+                System.out.println("STOPS IN DHAKA CITY");
+            }
 
             debugPrint(busStop);
 
@@ -153,7 +180,8 @@ public class NearbyBusStopsAPI {
     private void debugPrint(BusStops stops) {
         System.out.println();
         for (int i = 0; i < stops.results.size(); i++) {
-            System.out.println(stops.results.get(i).getName());
+            System.out.println(stops.results.get(i).getName() + "  cordinates: " + stops.results.get(i).getGeometry().getLocation().getLat()
+                    + " " + stops.results.get(i).getGeometry().getLocation().getLat());
         }
         System.out.println("----------------------------------------------");
         System.out.println();

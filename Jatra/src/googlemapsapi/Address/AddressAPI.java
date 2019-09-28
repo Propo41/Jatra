@@ -19,6 +19,7 @@ import java.util.*;
 public class AddressAPI {
 
     private String jsonString;
+    private int sessiontoken;
 
     //<editor-fold defaultstate="collapsed" desc="API-KEY">
     private final String PLACES_API_KEY = "AIzaSyDfAKN5tfaNv6CfPgwkcoSW9vmmgwYdM1A";
@@ -26,14 +27,17 @@ public class AddressAPI {
 
     private ArrayList<String> list;
 
-    public AddressAPI() {
+    public AddressAPI(int sessiontoken) {
         list = new ArrayList<>();
+        this.sessiontoken = sessiontoken;
+        System.out.println("session token for autocomplete: " + sessiontoken);
     }
 
     /*
+    Autocomplete place api
     the http url takes parameteres: location, radius, keyword, and type of addresses to return.
     location is set to an arbitary center point in the map of dhaka city.
-    radius is set to 8020km which covers dhaka city (estimated)
+    radius is set to 12000m which covers dhaka city (estimated)
     type of address is set to return exact locations of geolocations.
     returns: an array list of string containing the predictions (auto complete)
      */
@@ -44,10 +48,11 @@ public class AddressAPI {
             String address = "https://maps.googleapis.com/maps/api/place/autocomplete/json?"
                     + "input=" + keyword
                     + "&types=address&"
-                    + "location=23.790922,90.415615&"
-                    + "radius=8020&"
+                    + "location=23.809861,90.415615&"
+                    + "radius=12000&"
                     + "strictbounds&"
-                    + "key=" + PLACES_API_KEY;
+                    + "key=" + PLACES_API_KEY
+                    + "&sessiontoken=" + sessiontoken;
 
             jsonString = Parser.convertURLtoString(address);
             AutoCompleteAddress obj = Parser.deSerialize_Address(jsonString);

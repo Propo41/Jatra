@@ -1,14 +1,8 @@
 package owner;
 
-import googlemapsapi.Places.BusStops;
-import googlemapsapi.Others.Location;
-import googlemapsapi.Places.NearbyBusStopsAPI;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import googlemapsapi.Places.BusStopSuggestion;
 import main.JatraBegins;
 import util.popUpWindows.MoreSettings;
@@ -23,6 +17,7 @@ public class HomePage extends javax.swing.JFrame implements ComponentListener {
         initComponents();
         profilePopup = new MoreSettings();
         JatraBegins.setOwner_homepage(this);
+
         this.setLocationRelativeTo(null);
         addComponentListener(this);
         validate();

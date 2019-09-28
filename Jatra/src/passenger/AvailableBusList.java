@@ -5,6 +5,7 @@
  */
 package passenger;
 
+import googlemapsapi.Places.BusStops;
 import googlemapsapi.Places.Results;
 
 /**
@@ -15,12 +16,22 @@ public class AvailableBusList {
 
     private googlemapsapi.Places.Results stopsNearCurrLocation;
     private googlemapsapi.Places.Results stopsNearDestLocation;
+    private googlemapsapi.Places.BusStops allBusStops;
+
     private int busID;
 
     public AvailableBusList(Results stopsNearCurrLocation, Results stopsNearDestLocation, int busID) {
         this.stopsNearCurrLocation = stopsNearCurrLocation;
         this.stopsNearDestLocation = stopsNearDestLocation;
         this.busID = busID;
+    }
+
+    public BusStops getAllBusStops() {
+        return allBusStops;
+    }
+
+    public void setAllBusStops(BusStops allBusStops) {
+        this.allBusStops = allBusStops;
     }
 
     public AvailableBusList() {

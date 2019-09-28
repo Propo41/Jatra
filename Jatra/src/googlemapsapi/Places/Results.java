@@ -14,18 +14,18 @@ contains details for the busStops
  */
 public class Results {
 
-    private String icon;
-    private String id;
-    private String name;
-    private String place_id;
-    private String reference;
-    private String scope;
-    private String vicinity;
-    private double rating;
-    private int user_ratings_total;
-    private Geometry geometry;
+    final private String icon;
+    final private String id;
+    final private String name;
+    final private String place_id;
+    final private String reference;
+    final private String scope;
+    final private String vicinity;
+    final private double rating;
+    final private int user_ratings_total;
+    final private Geometry geometry;
 
-    public Results(String icon, String id, String name, String place_id, String reference, String scope, String vicinity, double rating, int user_ratings_total) {
+    public Results(String icon, String id, String name, String place_id, String reference, String scope, String vicinity, double rating, int user_ratings_total, Geometry geometry) {
         this.icon = icon;
         this.id = id;
         this.name = name;
@@ -35,36 +35,7 @@ public class Results {
         this.vicinity = vicinity;
         this.rating = rating;
         this.user_ratings_total = user_ratings_total;
-    }
-
-    //inner class inside class Results
-    class Geometry {
-
-        Location location;
-
-        //inner class inside class Geometry
-        class Location {
-
-            double lat;
-            double lng;
-
-            public Location(double lat, double lng) {
-                this.lat = lat;
-                this.lng = lng;
-            }
-
-            public double getLat() {
-                return lat;
-            }
-
-            public double getLng() {
-                return lng;
-            }
-        }
-
-        public Geometry(Location location) {
-            this.location = location;
-        }
+        this.geometry = geometry;
     }
 
     //getter methods

@@ -25,6 +25,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private ArrayList<String> destinedLocationPredictions;
     private static String currentlocation;
     private static String destinedlocation;
+    private int sessiontoken = 123;
 
     public Homepage() {
         initComponents();
@@ -291,7 +292,7 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private void currentSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentSearchActionPerformed
 
         String currentLocation = locationTextField.getText();
-        currentLocationPredictions = new AddressAPI().findAddressFromQuery(currentLocation);
+        currentLocationPredictions = new AddressAPI(sessiontoken).findAddressFromQuery(currentLocation);
         new PredictionsWindow(currentLocationPredictions, "current", this).setVisible(true);
 
     }//GEN-LAST:event_currentSearchActionPerformed
@@ -299,13 +300,14 @@ public class Homepage extends javax.swing.JFrame implements ComponentListener {
     private void destSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destSearchActionPerformed
 
         String destinedLocation = destTextField.getText();
-        destinedLocationPredictions = new AddressAPI().findAddressFromQuery(destinedLocation);
+        destinedLocationPredictions = new AddressAPI(sessiontoken).findAddressFromQuery(destinedLocation);
         new PredictionsWindow(destinedLocationPredictions, "destination", this).setVisible(true);
 
     }//GEN-LAST:event_destSearchActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
 
+        //radius = 1000 seems more sound
         new NearbyBusStopsAPI(1500).searchBusStopsNearby(null);
         // System.out.println("busStops searched nearby and put into file");
 

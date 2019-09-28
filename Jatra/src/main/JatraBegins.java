@@ -1,7 +1,10 @@
 package main;
 
 import googlemapsapi.Places.BusStops;
+import java.util.ArrayList;
+import java.util.List;
 import owner.HomePage;
+import passenger.AvailableBusList;
 import util.Login;
 import passenger.Homepage;
 
@@ -32,6 +35,9 @@ public class JatraBegins {
     private static int key;
     private static String user;
     private static passenger.Homepage passenger_homepage;
+    private static List<BusStops> listAllStops;
+    private static List<String> listStops;
+    private static List<AvailableBusList> listOfTargets;
 
     private static owner.HomePage owner_homepage;
     private static boolean CURRENT_SESSION = false;
@@ -40,8 +46,32 @@ public class JatraBegins {
     private static BusStops currBusStops;
     private static BusStops destBusStops;
 
+    public static List<String> getListStops() {
+        return listStops;
+    }
+
+    public static List<AvailableBusList> getListOfTargets() {
+        return listOfTargets;
+    }
+
+    public static void setListOfTargets(List<AvailableBusList> listOfTargets) {
+        JatraBegins.listOfTargets = listOfTargets;
+    }
+
+    public static void setListStops(List<String> listStops) {
+        JatraBegins.listStops = listStops;
+    }
+
     public static BusStops getCurrBusStops() {
         return currBusStops;
+    }
+
+    public static List<BusStops> getListAllStops() {
+        return listAllStops;
+    }
+
+    public static void setListAllStops(List<BusStops> listAllStops) {
+        JatraBegins.listAllStops = listAllStops;
     }
 
     public static void setCurrBusStops(BusStops currBusStops) {

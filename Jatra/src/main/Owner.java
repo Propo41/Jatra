@@ -29,7 +29,7 @@ public class Owner extends User {
     public Owner(String username, String phoneNumber, String city, String password, String email) {
         super(username, phoneNumber, city, password, email);
         setServiceType(OWNER);
-        this.busList = busList;
+
     }
 
     public List<Bus> getBusList() {

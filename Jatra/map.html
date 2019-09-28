@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /*  <span class="metadata-marker" style="display: none;" data-region_tag="css"></span>       Set the size of the div element that contains the map */
+        #map {
+            height: 600px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+    <script>
+        var map;
+        var InforObj = [];
+var centerCords = {lat: 23.75301145, lng: 90.37807615};var markersOnMap = [{placeName: "Kalabagan East Bus Stop", LatLng: [{ lat: 23.7475368, lng: 90.3805089}]},{placeName: "Manik Mian Avenue West Bus Stop", LatLng: [{ lat: 23.7584861, lng: 90.3756434}]}];
+        window.onload = function () {
+            initMap();
+        };
+
+        function addMarkerInfo() {
+            for (var i = 0; i < markersOnMap.length; i++) {
+                var contentString = '<div id="content"><h1>' + markersOnMap[i].placeName +
+                    '</h1><p>Lorem ipsum dolor sit amet, vix mutat posse suscipit id, vel ea tantas omittam detraxit.</p></div>';
+
+                const marker = new google.maps.Marker({
+                    position: markersOnMap[i].LatLng[0],
+                    map: map
+                });
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                    maxWidth: 200
+                });
+
+                marker.addListener('click', function () {
+                    closeOtherInfo();
+                    infowindow.open(marker.get('map'), marker);
+                    InforObj[0] = infowindow;
+                });
+                 marker.addListener('mouseover', function () {
+                     closeOtherInfo();
+                    infowindow.open(marker.get('map'), marker);
+                     InforObj[0] = infowindow;
+                 });
+                 marker.addListener('mouseout', function () {
+                    closeOtherInfo();
+                     infowindow.close();
+                     InforObj[0] = infowindow;
+                 });
+            }
+        }
+
+        function closeOtherInfo() {
+            if (InforObj.length > 0) {
+                /* detach the info-window from the marker ... undocumented in the API docs */
+                InforObj[0].set("marker", null);
+                /* and close it */
+                InforObj[0].close();
+                /* blank the array */
+                InforObj.length = 0;
+            }
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: centerCords
+            });
+            addMarkerInfo();
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Target Stops</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfAKN5tfaNv6CfPgwkcoSW9vmmgwYdM1A"></script>
+
+</body>
+
+</html>
