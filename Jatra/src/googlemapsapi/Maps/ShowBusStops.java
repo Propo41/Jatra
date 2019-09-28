@@ -5,6 +5,7 @@
  */
 package googlemapsapi.Maps;
 
+import googlemapsapi.Others.Location;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class ShowBusStops {
     /*
     used to show the list of bus Stops a bus travels through. Called from Bus Details window
      */
-    public ShowBusStops(String type, int busID) throws IOException {
+    public ShowBusStops(int busID) throws IOException {
 
         //using the busID, fetch all the busStops cordinates that bus travels through.
         stopList = new database.dataBaseSQL().getLocationOfBusStops(busID);
@@ -36,12 +37,28 @@ public class ShowBusStops {
 
     }
 
-    //this is called when debugging from this main method
     public ShowBusStops() throws IOException {
 
         stopList = new database.dataBaseSQL().getLocationOfBusStops(5);
         createURL();
         //  start();
+    }
+
+    //this is called when debugging from this main method
+    public ShowBusStops(List<googlemapsapi.Others.Location> stopList) throws IOException {
+
+        ShowBusStops.setStopList(stopList);
+        createURL();
+        start();
+
+    }
+
+    public static List<Location> getStopList() {
+        return stopList;
+    }
+
+    public static void setStopList(List<Location> stopList) {
+        ShowBusStops.stopList = stopList;
     }
 
     private static void createURL() throws IOException {

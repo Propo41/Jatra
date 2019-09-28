@@ -85,29 +85,15 @@ public class NearbyBusStopsAPI {
 
         String urlString;
 
-        if (JatraBegins.getUser().equals("passenger")) {
-
-            urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-                    + "location=" + currCoordinates.getLat()
-                    + ","
-                    + currCoordinates.getLng()
-                    + "&radius=" + radius
-                    + "&"
-                    + "type=busstop&"
-                    + "keyword=bus&"
-                    + "key=" + PLACES_API_KEY;
-        } else {
-            urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-                    + "location=" + currCoordinates.getLat()
-                    + ","
-                    + currCoordinates.getLng()
-                    + "&rankby=distance"
-                    + "&"
-                    + "type=bus_station&"
-                    + "keyword=bus&"
-                    + "key=" + PLACES_API_KEY;
-
-        }
+        urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+                + "location=" + currCoordinates.getLat()
+                + ","
+                + currCoordinates.getLng()
+                + "&radius=" + radius
+                + "&"
+                + "type=busstop&"
+                + "keyword=bus&"
+                + "key=" + PLACES_API_KEY;
 
         if (next_page_token != null) {
             urlString = urlString.concat("&pagetoken=" + next_page_token);

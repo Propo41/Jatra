@@ -5,8 +5,16 @@
  */
 package owner;
 
+import googlemapsapi.Address.AddressAPI;
+import googlemapsapi.Others.Location;
+import googlemapsapi.Places.BusStops;
+import googlemapsapi.Places.NearbyBusStopsAPI;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import main.JatraBegins;
 import util.popUpWindows.MoreSettings;
 
 /**
@@ -40,10 +48,8 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        locationTextField = new javax.swing.JTextField();
+        find = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,42 +103,38 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
 
         jPanel4.setBackground(new java.awt.Color(224, 224, 224));
 
-        jTextField1.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
+        locationTextField.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(51, 57, 64));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Find");
-        jButton1.setBorder(null);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        find.setBackground(new java.awt.Color(51, 57, 64));
+        find.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        find.setForeground(new java.awt.Color(255, 255, 255));
+        find.setText("Find");
+        find.setBorder(null);
+        find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44))
+                .addGap(187, 187, 187)
+                .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(find, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(174, 174, 174)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(find, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -142,7 +144,7 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,6 +167,17 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
         profilePopup.setVisible(true);
         profilePopup.setLocation(this.getX() + this.getWidth(), this.getY());
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
+        // TODO add your handling code here:
+
+        ArrayList<String> currentLocationPredictions;
+        int sessiontoken = 1234;
+        String currentLocation = locationTextField.getText();
+        currentLocationPredictions = new AddressAPI(sessiontoken).findAddressFromQuery(currentLocation);
+        new owner.PredictionsWindow(currentLocationPredictions, "current").setVisible(true);
+
+    }//GEN-LAST:event_findActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,17 +216,15 @@ public class ShowBusStops extends javax.swing.JFrame implements ComponentListene
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton find;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField locationTextField;
     // End of variables declaration//GEN-END:variables
 
     @Override

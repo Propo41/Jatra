@@ -166,7 +166,7 @@ public class BusDetails extends javax.swing.JFrame implements ComponentListener 
         // a dummy bus ID. The actual one would come from the cells window, when user clicks on the ith cell, then busID = i;
         int busID = 6;
         try {
-            new ShowBusStops("passenger", busID);
+            new ShowBusStops(busID);
         } catch (IOException ex) {
             Logger.getLogger(BusDetails.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -473,7 +473,7 @@ public class AddANewBus extends javax.swing.JFrame implements ComponentListener 
     }
 
     /*
-    this shit took me a freaking whole day!
+    this took me a freaking whole day!
     called implicitly from the method entryPoint() to find all bus stops around a 45k m radius from the center of DHAKA city
     the list of bus stops is stored in a list of string: listStops
     NOTE: the number of entries varies from time to time depending on the network. the delay is required as a result.
