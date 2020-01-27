@@ -11,6 +11,8 @@ An application designed to make bus commuting easier and efficient by providing 
   2. It uses a GPS tracking system to show you the real time location of the busses. As a result, you don’t have to wait for an                unknown amount of time and instead jump into a different transport if the bus is too far away or wait for a short period and              enjoy your ride with almost 1/5thof the cost
   3. Users are able to rate and review the busses to help the community
   
+Video illustration: https://youtu.be/SThGAGl_vBE
+  
 # Future Implementations
   1. Add live gps tracking system to track busses
   2. Seat reservation system
